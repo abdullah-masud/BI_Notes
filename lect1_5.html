@@ -1,0 +1,1150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INMT5526 Master Study Notes</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#faf9f7;--surface:#fff;--surface2:#f4f2ee;--border:#e5e0d8;
+  --text:#1a1814;--muted:#6b6560;--accent:#2d4a8a;--accent-light:#e8edf7;
+  --green:#1a6b3c;--green-light:#e8f5ee;--red:#8a2d2d;--red-light:#f7e8e8;
+  --orange:#8a5a1a;--orange-light:#f7f0e8;--purple:#5a2d8a;--purple-light:#f0e8f7;
+  --code-bg:#1e1e2e;--code-text:#cdd6f4;
+  --l1:#2d4a8a;--l2:#1a6b3c;--l3:#8a5a1a;--l4:#5a2d8a;--l5:#8a2d2d;
+  --eg:#0d3340;--eg-border:#1a6b8a;--eg-light:#e8f4f8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--text);font-family:'Space Grotesk',system-ui,sans-serif;font-size:15px;line-height:1.75;}
+
+/* NAV */
+.topbar{position:sticky;top:0;z-index:100;background:var(--text);display:flex;align-items:center;overflow-x:auto;scrollbar-width:none;}
+.topbar::-webkit-scrollbar{display:none;}
+.topbar-brand{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;white-space:nowrap;padding:12px 20px;border-right:1px solid rgba(255,255,255,.15);color:#fff;text-decoration:none;}
+.topbar a{font-size:12px;font-weight:500;white-space:nowrap;padding:12px 14px;color:rgba(255,255,255,.7);text-decoration:none;border-right:1px solid rgba(255,255,255,.08);transition:.2s;}
+.topbar a:hover{background:rgba(255,255,255,.1);color:#fff;}
+.topbar a.lect1{color:#93b4ff;}.topbar a.lect2{color:#93ffca;}.topbar a.lect3{color:#ffd693;}
+.topbar a.lect4{color:#d693ff;}.topbar a.lect5{color:#ff9393;}
+
+/* HERO */
+.hero{background:var(--text);color:#fff;padding:64px 40px 48px;position:relative;overflow:hidden;}
+.hero::after{content:'INMT5526';position:absolute;right:-20px;bottom:-30px;font-family:'Playfair Display',serif;font-size:140px;font-weight:700;color:rgba(255,255,255,.04);pointer-events:none;line-height:1;}
+.hero-label{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:3px;text-transform:uppercase;color:rgba(255,255,255,.5);margin-bottom:16px;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(32px,6vw,60px);font-weight:700;line-height:1.1;margin-bottom:16px;}
+.hero p{font-size:16px;color:rgba(255,255,255,.65);max-width:620px;margin-bottom:28px;}
+.lecture-pills{display:flex;flex-wrap:wrap;gap:8px;}
+.pill{font-family:'JetBrains Mono',monospace;font-size:11px;padding:5px 12px;border-radius:20px;border:1px solid;font-weight:500;}
+.pill.l1{color:#93b4ff;border-color:rgba(147,180,255,.3);background:rgba(147,180,255,.08);}
+.pill.l2{color:#93ffca;border-color:rgba(147,255,202,.3);background:rgba(147,255,202,.08);}
+.pill.l3{color:#ffd693;border-color:rgba(255,214,147,.3);background:rgba(255,214,147,.08);}
+.pill.l4{color:#d693ff;border-color:rgba(214,147,255,.3);background:rgba(214,147,255,.08);}
+.pill.l5{color:#ff9393;border-color:rgba(255,147,147,.3);background:rgba(255,147,147,.08);}
+
+/* LAYOUT */
+.container{max-width:920px;margin:0 auto;padding:0 24px 100px;}
+
+/* LECTURE HEADERS */
+.lect-header{display:flex;align-items:center;gap:16px;padding:44px 0 20px;border-bottom:2px solid var(--border);margin-bottom:28px;}
+.lect-num{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:500;padding:6px 12px;border-radius:4px;white-space:nowrap;color:#fff;}
+.ln1{background:var(--l1);}.ln2{background:var(--l2);}.ln3{background:var(--l3);}.ln4{background:var(--l4);}.ln5{background:var(--l5);}
+.lect-header h2{font-family:'Playfair Display',serif;font-size:clamp(22px,4vw,32px);font-weight:700;}
+
+/* HEADINGS */
+h3{font-size:17px;font-weight:600;color:var(--text);margin:30px 0 10px;display:flex;align-items:center;gap:10px;}
+h3::before{content:'';display:inline-block;width:4px;height:18px;border-radius:2px;flex-shrink:0;background:var(--accent);}
+.s2 h3::before{background:var(--l2);}.s3 h3::before{background:var(--l3);}.s4 h3::before{background:var(--l4);}.s5 h3::before{background:var(--l5);}
+h4{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:1px;color:var(--muted);margin:18px 0 8px;}
+p{margin-bottom:12px;}
+ul,ol{padding-left:20px;margin-bottom:12px;}
+li{margin-bottom:5px;}
+
+/* CODE */
+code{font-family:'JetBrains Mono',monospace;font-size:12.5px;background:var(--surface2);border:1px solid var(--border);border-radius:3px;padding:1px 5px;color:var(--accent);}
+pre{background:var(--code-bg);border-radius:8px;padding:18px 20px;overflow-x:auto;margin:12px 0;font-family:'JetBrains Mono',monospace;font-size:12.5px;line-height:1.85;color:var(--code-text);}
+.kw{color:#cba6f7;font-weight:600;}.fn{color:#89dceb;}.str{color:#a6e3a1;}.cm{color:#585b70;font-style:italic;}.ph{color:#f38ba8;}.num{color:#fab387;}
+
+/* BOXES */
+.box{border-radius:6px;padding:14px 16px;margin:14px 0;border:1px solid;}
+.box-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:500;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;display:flex;align-items:center;gap:6px;}
+.def{background:var(--accent-light);border-color:rgba(45,74,138,.2);}
+.def .box-title{color:var(--accent);}
+.trap{background:var(--red-light);border-color:rgba(138,45,45,.2);}
+.trap .box-title{color:var(--red);}
+.tip{background:var(--green-light);border-color:rgba(26,107,60,.2);}
+.tip .box-title{color:var(--green);}
+.warn{background:var(--orange-light);border-color:rgba(138,90,26,.2);}
+.warn .box-title{color:var(--orange);}
+.important{background:var(--purple-light);border-color:rgba(90,45,138,.2);}
+.important .box-title{color:var(--purple);}
+
+/* EXAMPLE BLOCK — the new star of the show */
+.example{background:#f0f8ff;border:1px solid #b8d9f0;border-left:4px solid #1a6b8a;border-radius:6px;padding:16px 18px;margin:16px 0;}
+.example-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#1a6b8a;margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.example pre{margin:8px 0;border-radius:6px;}
+.example p{margin-bottom:8px;}
+.example ul{margin-bottom:8px;}
+
+/* ANALOGY BLOCK */
+.analogy{background:#fffbf0;border:1px solid #e8d88a;border-left:4px solid #b8960a;border-radius:6px;padding:14px 16px;margin:14px 0;}
+.analogy-title{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:2px;text-transform:uppercase;color:#8a6c0a;margin-bottom:8px;}
+
+/* RESULT TABLE */
+.result-table{background:var(--surface);border:1px solid var(--border);border-radius:6px;overflow:hidden;margin:10px 0;}
+.result-table-label{font-family:'JetBrains Mono',monospace;font-size:10px;padding:6px 12px;background:var(--surface2);border-bottom:1px solid var(--border);color:var(--muted);letter-spacing:1px;text-transform:uppercase;}
+.result-table table{margin:0;font-size:13px;}
+.result-table th{background:#2d4a8a;font-size:11px;padding:7px 12px;}
+.result-table td{padding:7px 12px;}
+
+/* TABLE */
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.5px;}
+th{background:var(--text);color:#fff;font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:1px;padding:9px 12px;text-align:left;}
+td{padding:8px 12px;border-bottom:1px solid var(--border);vertical-align:top;}
+tr:nth-child(even) td{background:var(--surface2);}
+td code{font-size:12px;}
+
+/* CLAUSE ORDER */
+.clause-order{background:var(--code-bg);border-radius:8px;padding:16px 20px;margin:12px 0;display:flex;align-items:center;flex-wrap:wrap;gap:6px;font-family:'JetBrains Mono',monospace;font-size:12px;}
+.clause{padding:5px 12px;border-radius:4px;color:#fff;font-weight:500;}
+.c-select{background:#6c91c2;}.c-from{background:#4a7c59;}.c-where{background:#8a6c4a;}.c-group{background:#6c4a8a;}.c-order{background:#8a4a4a;}
+.clause-arrow{color:rgba(255,255,255,.35);font-size:16px;}
+.clause-note{color:rgba(255,255,255,.45);font-size:11px;width:100%;margin-top:8px;}
+
+/* STEP BY STEP */
+.steps{counter-reset:step;list-style:none;padding:0;}
+.steps li{counter-increment:step;display:flex;gap:14px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--border);}
+.steps li:last-child{border:none;}
+.step-num{background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:600;min-width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-num::before{content:counter(step);}
+
+/* CHECKLIST */
+.checklist{list-style:none;padding:0;}
+.checklist li{display:flex;gap:10px;align-items:flex-start;padding:7px 0;border-bottom:1px solid var(--border);font-size:14px;}
+.checklist li:last-child{border:none;}
+.cb{width:17px;height:17px;min-width:17px;border:2px solid var(--border);border-radius:3px;margin-top:3px;}
+
+/* EXAM Q */
+.eq{background:var(--surface);border:1px solid var(--border);border-left:4px solid var(--accent);border-radius:4px;padding:14px 16px;margin:10px 0;display:flex;gap:14px;}
+.eq-n{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:var(--accent);min-width:30px;line-height:1.1;}
+.eq-type{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted);margin-bottom:4px;}
+.eq-q{font-size:14px;}
+
+/* SUMMARY GRID */
+.summary-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px;margin:16px 0;}
+.sc{background:var(--surface);border:1px solid var(--border);border-radius:6px;padding:14px 16px;}
+.sc-label{font-family:'JetBrains Mono',monospace;font-size:10px;text-transform:uppercase;letter-spacing:2px;font-weight:500;margin-bottom:8px;}
+.sc-l1 .sc-label{color:var(--l1);}.sc-l2 .sc-label{color:var(--l2);}.sc-l3 .sc-label{color:var(--l3);}.sc-l4 .sc-label{color:var(--l4);}.sc-l5 .sc-label{color:var(--l5);}
+.sc ul{padding-left:16px;font-size:13px;color:var(--muted);}
+hr{border:none;border-top:1px solid var(--border);margin:32px 0;}
+footer{background:var(--text);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-family:'JetBrains Mono',monospace;font-size:11px;}
+</style>
+</head>
+<body>
+
+<nav class="topbar">
+  <a class="topbar-brand" href="#">INMT5526</a>
+  <a class="lect1" href="#lect1">L1 · BI Intro</a>
+  <a class="lect2" href="#lect2">L2 · Databases</a>
+  <a class="lect3" href="#lect3">L3 · SQL Basics</a>
+  <a class="lect4" href="#lect4">L4 · More CRUD</a>
+  <a class="lect5" href="#lect5">L5 · Sort/Group/Agg</a>
+  <a href="#checklist">✓ Checklist</a>
+  <a href="#examqs">📝 Exam Qs</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-label">Business Intelligence · INMT5526 · UWA</div>
+  <h1>Master Study Notes</h1>
+  <p>All 5 lectures — concepts explained simply with real examples, analogies, worked queries, and result tables so you can actually understand what's happening, not just memorise it.</p>
+  <div class="lecture-pills">
+    <span class="pill l1">L1 · BI Concepts &amp; Intro</span>
+    <span class="pill l2">L2 · Database Modelling</span>
+    <span class="pill l3">L3 · SQL Basics &amp; CRUD</span>
+    <span class="pill l4">L4 · More CRUD &amp; WHERE</span>
+    <span class="pill l5">L5 · Sort, Group &amp; Aggregation</span>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ══════════════════════════════════════════════════════════
+     LECTURE 1
+═══════════════════════════════════════════════════════════ -->
+<div class="s1">
+<div class="lect-header" id="lect1">
+  <span class="lect-num ln1">LECTURE 01</span>
+  <h2>Business Intelligence Concepts</h2>
+</div>
+
+<h3>What Is Business Intelligence?</h3>
+<p>Business Intelligence (BI) is using tools and techniques to <strong>turn raw data into useful decisions</strong>. A simple way to think about it: data goes in, insight comes out, and a manager makes a better choice.</p>
+
+<div class="analogy">
+  <div class="analogy-title">🧠 Analogy</div>
+  <p>Think of BI like a GPS for a business. Raw data (like road sensors and maps) is collected constantly. The GPS (BI system) processes all of it and tells you: "Turn left — there's traffic on the highway." You don't need to know <em>how</em> the GPS works internally; you just need the right output at the right time to make a decision.</p>
+</div>
+
+<h3>The Analytical Hierarchy — 5 Levels</h3>
+<p>Analytics moves from simple "what happened" questions to complex "what should we do" questions.</p>
+
+<table>
+  <thead><tr><th>Level</th><th>Question It Answers</th><th>Time</th><th>Real Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Descriptive</strong></td><td>What happened?</td><td>Past</td><td>"We sold 500 units in March."</td></tr>
+    <tr><td><strong>Diagnostic</strong></td><td>Why did it happen?</td><td>Past</td><td>"Sales dropped because a competitor launched a cheaper product."</td></tr>
+    <tr><td><strong>Predictive</strong></td><td>What will happen?</td><td>Future</td><td>"Based on trends, we'll sell 480 units next March."</td></tr>
+    <tr><td><strong>Prescriptive</strong></td><td>What should we do about it?</td><td>Future</td><td>"Run a 10% discount campaign to push sales above 500."</td></tr>
+    <tr><td><strong>Comparative</strong></td><td>How does X compare to Y?</td><td>Any</td><td>"Perth store vs Sydney store sales side by side."</td></tr>
+  </tbody>
+</table>
+
+<div class="example">
+  <div class="example-title">💡 Quick Memory Trick</div>
+  <p>Think of it like a car accident:</p>
+  <ul>
+    <li><strong>Descriptive:</strong> "There was a crash on the freeway." (What?)</li>
+    <li><strong>Diagnostic:</strong> "It happened because of wet roads and speeding." (Why?)</li>
+    <li><strong>Predictive:</strong> "If it rains tonight, there's a 70% chance of another crash." (What next?)</li>
+    <li><strong>Prescriptive:</strong> "Deploy speed cameras on wet roads to prevent it." (What to do?)</li>
+  </ul>
+</div>
+
+<div class="box trap">
+  <div class="box-title">⚠️ Exam Trap</div>
+  <p>Predictive = "what WILL happen" (forecasting). Prescriptive = "what should we DO" (recommending action). Students often mix these two up. Predictive just tells you the future — prescriptive tells you how to change it.</p>
+</div>
+
+<h3>Key BI Components — With Examples</h3>
+
+<table>
+  <thead><tr><th>Component</th><th>Plain Definition</th><th>Real-World Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Visualisation</strong></td><td>Any way to display data</td><td>A bar chart showing monthly sales by region</td></tr>
+    <tr><td><strong>Report</strong></td><td>Multiple visualisations from one dataset across multiple pages</td><td>A 5-page sales report with charts, tables, and maps</td></tr>
+    <tr><td><strong>Dashboard</strong></td><td>A single-page summary — the most important bits only</td><td>An executive screen showing revenue, KPIs, and customer count at a glance</td></tr>
+    <tr><td><strong>Dataset</strong></td><td>A collection of data</td><td>A spreadsheet of all orders from 2023</td></tr>
+    <tr><td><strong>Dataflow</strong></td><td>A process that cleans/prepares raw data for analysis</td><td>Combining sales data from 3 different stores into one clean table</td></tr>
+  </tbody>
+</table>
+
+<div class="example">
+  <div class="example-title">💡 Report vs Dashboard — Easy way to remember</div>
+  <p>A <strong>Report</strong> = a full novel (many pages, lots of detail, explores everything).<br>
+  A <strong>Dashboard</strong> = a book cover (one page, only the most critical info, quick to read).</p>
+  <p>A Dashboard is <em>built from</em> multiple reports but shows only one page.</p>
+</div>
+
+<h3>Interrogating Data</h3>
+<table>
+  <thead><tr><th>Action</th><th>What It Does</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Drill down</strong></td><td>Go to a more detailed level</td><td>Click "2023 Total Sales" → see Q1, Q2, Q3, Q4 breakdown</td></tr>
+    <tr><td><strong>Drill through</strong></td><td>Click part of a visual → jump to a different page filtered to that selection</td><td>Click "Perth" on a map → taken to a Perth-specific page</td></tr>
+    <tr><td><strong>Filter</strong></td><td>Hides data that doesn't apply — it's gone from view</td><td>Filter by year=2023 → only 2023 data visible</td></tr>
+    <tr><td><strong>Highlight</strong></td><td>Greys out non-matching data — it stays but is faded</td><td>Highlight "Perth" → other regions fade, Perth stays bright</td></tr>
+  </tbody>
+</table>
+</div><!-- /s1 -->
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════
+     LECTURE 2
+═══════════════════════════════════════════════════════════ -->
+<div class="s2">
+<div class="lect-header" id="lect2">
+  <span class="lect-num ln2">LECTURE 02</span>
+  <h2>Database Modelling</h2>
+</div>
+
+<h3>What Is a Database?</h3>
+<p>A database is <strong>organised, structured data stored consistently</strong> — like tables and lists, not free-form text. Think of it like a very powerful, shared spreadsheet that many people can use at once, with rules that keep the data valid.</p>
+
+<div class="analogy">
+  <div class="analogy-title">🧠 Analogy — Library vs Pile of Books</div>
+  <p>A pile of books is data. A library is a database — books are catalogued, findable, categorised, and multiple people can use it simultaneously without chaos. A spreadsheet is like a personal bookshelf — fine for one person, but falls apart at scale.</p>
+</div>
+
+<h3>Database vs Spreadsheet</h3>
+<table>
+  <thead><tr><th>Feature</th><th>Spreadsheet</th><th>Database</th></tr></thead>
+  <tbody>
+    <tr><td>Multiple users at once</td><td>❌ One user at a time (usually)</td><td>✅ Many simultaneous users</td></tr>
+    <tr><td>Large data performance</td><td>❌ Slow with millions of rows</td><td>✅ Designed for scale</td></tr>
+    <tr><td>Access control</td><td>❌ Basic file permissions only</td><td>✅ Fine-grained (user A sees table X, user B sees table Y)</td></tr>
+    <tr><td>Ease of use</td><td>✅ Familiar, visual, easy</td><td>❌ Requires SQL knowledge</td></tr>
+  </tbody>
+</table>
+
+<h3>Entities and Attributes</h3>
+<div class="box def">
+  <div class="box-title">📌 Key Definitions</div>
+  <ul>
+    <li><strong>Entity:</strong> A "thing" we want to store data about (a Person, a Product, a Transaction)</li>
+    <tr><td><strong>Attribute/Property:</strong> A characteristic of an entity (Person's Name, Product's Price)</li>
+    <li><strong>Row / Record:</strong> One specific instance (one particular person, one specific product)</li>
+    <li><strong>Column / Field:</strong> One attribute (the "Name" column, the "Price" column)</li>
+  </ul>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 Example — A Person entity</div>
+  <p>The <strong>entity</strong> is: Person<br>
+  The <strong>attributes</strong> are: FullName, EmailAddress, BirthDate<br>
+  One <strong>row</strong> (record) might be: "Alice Smith", "alice@email.com", "1995-03-14"</p>
+  <div class="result-table">
+    <div class="result-table-label">Person Table</div>
+    <table>
+      <thead><tr><th>id (PK)</th><th>fullName</th><th>emailAddress</th><th>birthDate</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Alice Smith</td><td>alice@email.com</td><td>1995-03-14</td></tr>
+        <tr><td>2</td><td>Bob Jones</td><td>bob@email.com</td><td>1988-07-22</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h3>Primary Keys (PK) and Foreign Keys (FK)</h3>
+
+<div class="example">
+  <div class="example-title">💡 Example — Two linked tables</div>
+  <p>Imagine a <strong>Customer</strong> table and an <strong>Invoice</strong> table. Each invoice belongs to a customer.</p>
+  <div class="result-table">
+    <div class="result-table-label">Customer Table — id is the Primary Key</div>
+    <table>
+      <thead><tr><th>id (PK)</th><th>name</th><th>email</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Alice Smith</td><td>alice@email.com</td></tr>
+        <tr><td>2</td><td>Bob Jones</td><td>bob@email.com</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="result-table">
+    <div class="result-table-label">Invoice Table — customerID is a Foreign Key pointing to Customer.id</div>
+    <table>
+      <thead><tr><th>id (PK)</th><th>customerID (FK)</th><th>amount</th><th>date</th></tr></thead>
+      <tbody>
+        <tr><td>101</td><td>1</td><td>$250.00</td><td>2023-03-01</td></tr>
+        <tr><td>102</td><td>1</td><td>$80.00</td><td>2023-04-15</td></tr>
+        <tr><td>103</td><td>2</td><td>$430.00</td><td>2023-04-20</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Invoice 101 and 102 both have <code>customerID = 1</code>, meaning Alice Smith made both those purchases. The FK <em>links</em> back to the Customer table via Alice's PK (id = 1). This is a <strong>1 Customer → Many Invoices</strong> relationship (1:M).</p>
+</div>
+
+<h3>Relationship Cardinalities</h3>
+<table>
+  <thead><tr><th>Type</th><th>Symbol</th><th>Meaning</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>One to Many</strong></td><td>1:M</td><td>One parent, many children</td><td>One Customer → many Invoices</td></tr>
+    <tr><td><strong>Many to One</strong></td><td>M:1</td><td>Many children, one parent</td><td>Many Invoices → one Customer</td></tr>
+    <tr><td><strong>One to One</strong></td><td>1:1</td><td>Each links to exactly one other</td><td>One Person → one Passport</td></tr>
+    <tr><td><strong>Many to Many</strong></td><td>M:M</td><td>Both sides link to many</td><td>Students ↔ Courses (a student takes many courses; a course has many students)</td></tr>
+  </tbody>
+</table>
+
+<div class="box warn">
+  <div class="box-title">⚠️ Many-to-Many needs a linking table</div>
+  <p>You can't directly store a M:M relationship. You need a third "junction" table holding pairs of PKs. For Students ↔ Courses, you'd have an <strong>Enrolment</strong> table with (studentID, courseID) pairs.</p>
+</div>
+
+<h3>Types of Databases</h3>
+<table>
+  <thead><tr><th>Type</th><th>Plain English</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Relational</strong></td><td>Tables, rows, columns — most common</td><td>MySQL, PostgreSQL</td></tr>
+    <tr><td><strong>NoSQL</strong></td><td>"Not only SQL" — flexible, less structured</td><td>MongoDB (used in JavaScript apps)</td></tr>
+    <tr><td><strong>Graph</strong></td><td>Stores entities and relationships between them — great for M:M</td><td>Neo4j (social networks)</td></tr>
+    <tr><td><strong>Data Warehouse</strong></td><td>Central hub for analysis — fast reads</td><td>Snowflake, Amazon Redshift</td></tr>
+    <tr><td><strong>Distributed</strong></td><td>Data spread across multiple machines for resilience</td><td>Google Spanner</td></tr>
+    <tr><td><strong>Cloud</strong></td><td>Database hosted and managed in the cloud</td><td>Amazon RDS, Azure SQL</td></tr>
+    <tr><td><strong>Document (JSON)</strong></td><td>Stores key-value JSON documents</td><td>MongoDB, CouchDB</td></tr>
+    <tr><td><strong>Object-oriented</strong></td><td>Stores objects (like OOP programming)</td><td>db4o</td></tr>
+  </tbody>
+</table>
+
+<h3>ER Diagrams — Reading Them</h3>
+<p>An ER (Entity-Relationship) diagram is a <strong>visual map</strong> of your database design — showing entities (tables), their attributes (columns), and how they are related.</p>
+
+<div class="example">
+  <div class="example-title">💡 Example — Transaction ↔ TransactionItem (from the lecture)</div>
+  <pre><span class="cm">Transaction                        TransactionItem
+─────────────────────              ─────────────────────────────
+id (PK)          ───1:M───         id (PK)
+date                               description
+customerName                       quantity
+                                   unitPrice
+                                   hasGst
+                                   totalPrice (generated)
+                                   taxAmount (generated)
+                                   transaction (FK → Transaction.id)</span></pre>
+  <p>One Transaction can have many TransactionItems (e.g. one invoice with multiple line items). The FK <code>transaction</code> in TransactionItem points back to the Transaction it belongs to.</p>
+</div>
+
+<h3>Database Design Steps (Memorise These)</h3>
+<ol class="steps">
+  <li><div><strong>Define the entities</strong> — what "things" do we need to store? (People, Products, Orders...)</div></li>
+  <li><div><strong>Determine the tables</strong> — each entity usually becomes one table</div></li>
+  <li><div><strong>Identify Primary and Foreign Keys</strong> — how do rows uniquely identify themselves? How do tables link?</div></li>
+  <li><div><strong>Describe relationship cardinalities</strong> — is it 1:M, M:M, 1:1?</div></li>
+  <li><div><strong>Define all attributes</strong> — what columns does each table need?</div></li>
+</ol>
+</div><!-- /s2 -->
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════
+     LECTURE 3
+═══════════════════════════════════════════════════════════ -->
+<div class="s3">
+<div class="lect-header" id="lect3">
+  <span class="lect-num ln3">LECTURE 03</span>
+  <h2>SQL Basics &amp; CRUD</h2>
+</div>
+
+<h3>CRUD — The Four Operations</h3>
+<table>
+  <thead><tr><th>Letter</th><th>Operation</th><th>SQL Command</th><th>Real-Life Equivalent</th></tr></thead>
+  <tbody>
+    <tr><td><strong>C</strong></td><td>Create</td><td><code>INSERT INTO</code></td><td>Filling in a new form and submitting it</td></tr>
+    <tr><td><strong>R</strong></td><td>Read</td><td><code>SELECT</code></td><td>Searching for something in a filing cabinet</td></tr>
+    <tr><td><strong>U</strong></td><td>Update</td><td><code>UPDATE</code></td><td>Crossing out old info and writing new info on a form</td></tr>
+    <tr><td><strong>D</strong></td><td>Delete</td><td><code>DELETE FROM</code></td><td>Shredding a form permanently</td></tr>
+  </tbody>
+</table>
+
+<h3>ACID Principles</h3>
+<div class="analogy">
+  <div class="analogy-title">🧠 Analogy — ATM Cash Withdrawal</div>
+  <p>You withdraw $100 from an ATM. ACID guarantees that EITHER both happen (your account is debited AND cash dispensed) OR neither does. The bank balance can never be reduced without you getting the cash.</p>
+  <ul>
+    <li><strong>Atomicity:</strong> The whole withdrawal succeeds or nothing changes (no partial results)</li>
+    <li><strong>Consistency:</strong> The bank database stays valid — you can't have a negative balance unless rules allow it</li>
+    <li><strong>Isolation:</strong> Two people withdrawing simultaneously get correct results, as if they went one at a time</li>
+    <li><strong>Durability:</strong> Once confirmed, the transaction is permanent — even if the power cuts out</li>
+  </ul>
+</div>
+
+<h3>MySQL Data Types</h3>
+<table>
+  <thead><tr><th>Type</th><th>What It Stores</th><th>Example Value</th><th>Gotcha</th></tr></thead>
+  <tbody>
+    <tr><td><code>DATE</code></td><td>A date</td><td><code>'2023-07-31'</code></td><td>Must use YYYY-MM-DD format with single quotes</td></tr>
+    <tr><td><code>DATETIME</code></td><td>Date + time</td><td><code>'2023-07-31 14:30:00'</code></td><td>Stores both together</td></tr>
+    <tr><td><code>VARCHAR(X)</code></td><td>Text up to X characters</td><td><code>'Alice Smith'</code></td><td>Only uses space for what's stored — efficient</td></tr>
+    <tr><td><code>CHAR(X)</code></td><td>Text — always exactly X characters</td><td><code>'AU'</code></td><td>Pads with spaces — use for fixed-length codes (e.g. postcodes)</td></tr>
+    <tr><td><code>BOOLEAN</code></td><td>True/False</td><td><code>1</code> or <code>0</code></td><td>Stored as 1 (true) or 0 (false) — not "true"/"false"</td></tr>
+    <tr><td><code>INT</code></td><td>Whole numbers</td><td><code>42</code></td><td>No decimals at all</td></tr>
+    <tr><td><code>FLOAT</code></td><td>Decimal numbers</td><td><code>19.99</code></td><td>Imprecise — don't use <code>=</code> to compare floats</td></tr>
+  </tbody>
+</table>
+
+<div class="example">
+  <div class="example-title">💡 VARCHAR vs CHAR — When to use which?</div>
+  <p>Use <code>VARCHAR</code> for names, descriptions, emails — anything variable length.<br>
+  Use <code>CHAR</code> for fixed codes like Australian state codes (NSW, VIC, QLD — always 2–3 chars) or postcodes (always 4 digits).</p>
+  <pre><span class="cm">-- Good uses:</span>
+customerName <span class="fn">VARCHAR</span>(<span class="num">100</span>),   <span class="cm">-- names vary in length</span>
+stateCode    <span class="fn">CHAR</span>(<span class="num">3</span>),        <span class="cm">-- always "NSW", "VIC", "QLD"</span>
+postcode     <span class="fn">CHAR</span>(<span class="num">4</span>)         <span class="cm">-- always 4 digits in Australia</span></pre>
+</div>
+
+<h3>Field Modifiers</h3>
+<table>
+  <thead><tr><th>Modifier</th><th>What It Does</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><code>PRIMARY KEY</code></td><td>Unique identifier for each row — no duplicates allowed</td><td><code>id INT PRIMARY KEY</code></td></tr>
+    <tr><td><code>AUTO_INCREMENT</code></td><td>MySQL automatically assigns the next number (1, 2, 3…) — you never set it manually</td><td><code>id INT AUTO_INCREMENT</code></td></tr>
+    <tr><td><code>NOT NULL</code></td><td>This field is mandatory — the database will reject a row without it</td><td><code>name VARCHAR(100) NOT NULL</code></td></tr>
+    <tr><td><code>FOREIGN KEY</code></td><td>Links this column to a PK in another table</td><td>See below</td></tr>
+  </tbody>
+</table>
+
+<h3>Creating a Database &amp; Table — Full Example</h3>
+
+<div class="example">
+  <div class="example-title">💡 Step-by-step — Building a Customer table from scratch</div>
+  <pre><span class="cm">-- Step 1: Create a database (do this once)</span>
+<span class="kw">CREATE DATABASE</span> <span class="ph">12345678_db</span>;
+
+<span class="cm">-- Step 2: Tell MySQL to use that database (run at start of every session)</span>
+<span class="kw">USE</span> <span class="ph">12345678_db</span>;
+
+<span class="cm">-- Step 3: Create a Customer table</span>
+<span class="kw">CREATE TABLE</span> <span class="ph">12345678_db</span>.Customer (
+  id          <span class="fn">INT</span>          <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  fullName    <span class="fn">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,
+  email       <span class="fn">VARCHAR</span>(<span class="num">255</span>) <span class="kw">NOT NULL</span>,
+  birthDate   <span class="fn">DATE</span>,          <span class="cm">-- nullable: not everyone shares their DOB</span>
+  isActive    <span class="fn">BOOLEAN</span>      <span class="kw">DEFAULT</span> <span class="num">1</span>,
+  <span class="kw">PRIMARY KEY</span> (id)
+);</pre>
+  <p>Reading this column by column: <code>id</code> is a whole number, always required, auto-assigned. <code>fullName</code> is text up to 100 chars, always required. <code>birthDate</code> is optional (nullable). <code>isActive</code> defaults to 1 (true) if not specified.</p>
+</div>
+
+<h3>ALTER TABLE — Modifying an Existing Table</h3>
+
+<div class="example">
+  <div class="example-title">💡 Example — Changing the Customer table after it's created</div>
+  <pre><span class="cm">-- Forgot to add a phone number column? Add it now:</span>
+<span class="kw">ALTER TABLE</span> Customer <span class="kw">ADD COLUMN</span> phoneNumber <span class="fn">VARCHAR</span>(<span class="num">20</span>);
+
+<span class="cm">-- "fullName" is confusing — rename it to "customerName":</span>
+<span class="kw">ALTER TABLE</span> Customer <span class="kw">RENAME COLUMN</span> fullName <span class="kw">TO</span> customerName;
+
+<span class="cm">-- Change phone to be mandatory (add NOT NULL):</span>
+<span class="kw">ALTER TABLE</span> Customer <span class="kw">MODIFY COLUMN</span> phoneNumber <span class="fn">VARCHAR</span>(<span class="num">20</span>) <span class="kw">NOT NULL</span>;
+
+<span class="cm">-- Oops, phone number column is wrong — remove it entirely:</span>
+<span class="kw">ALTER TABLE</span> Customer <span class="kw">DROP COLUMN</span> phoneNumber;</pre>
+</div>
+
+<h3>INSERT, SELECT, UPDATE, DELETE — With Results</h3>
+
+<div class="example">
+  <div class="example-title">💡 INSERT — Adding rows</div>
+  <pre><span class="kw">INSERT INTO</span> Customer (fullName, email, birthDate) <span class="kw">VALUES</span>
+  (<span class="str">'Alice Smith'</span>, <span class="str">'alice@email.com'</span>, <span class="str">'1995-03-14'</span>),
+  (<span class="str">'Bob Jones'</span>,  <span class="str">'bob@email.com'</span>,   <span class="str">'1988-07-22'</span>);</pre>
+  <p>Two rows inserted. MySQL auto-assigns id=1 to Alice, id=2 to Bob. <code>isActive</code> defaults to 1 for both.</p>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 SELECT — Reading data</div>
+  <pre><span class="cm">-- Get all columns from all rows:</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> Customer;
+
+<span class="cm">-- Get just names and emails:</span>
+<span class="kw">SELECT</span> fullName, email <span class="kw">FROM</span> Customer;
+
+<span class="cm">-- Get only active customers:</span>
+<span class="kw">SELECT</span> fullName, email <span class="kw">FROM</span> Customer <span class="kw">WHERE</span> isActive = <span class="num">1</span>;</pre>
+  <div class="result-table">
+    <div class="result-table-label">Result of SELECT * FROM Customer</div>
+    <table>
+      <thead><tr><th>id</th><th>fullName</th><th>email</th><th>birthDate</th><th>isActive</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Alice Smith</td><td>alice@email.com</td><td>1995-03-14</td><td>1</td></tr>
+        <tr><td>2</td><td>Bob Jones</td><td>bob@email.com</td><td>1988-07-22</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 UPDATE — Changing existing data</div>
+  <pre><span class="cm">-- Alice changed her email — update just her row:</span>
+<span class="kw">UPDATE</span> Customer
+<span class="kw">SET</span> email = <span class="str">'alice.smith@newemail.com'</span>
+<span class="kw">WHERE</span> id = <span class="num">1</span>;
+
+<span class="cm">-- Deactivate Bob:</span>
+<span class="kw">UPDATE</span> Customer <span class="kw">SET</span> isActive = <span class="num">0</span> <span class="kw">WHERE</span> id = <span class="num">2</span>;</pre>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 DELETE — Removing rows</div>
+  <pre><span class="cm">-- Delete only Bob (always use WHERE!):</span>
+<span class="kw">DELETE FROM</span> Customer <span class="kw">WHERE</span> id = <span class="num">2</span>;
+
+<span class="cm">-- DANGER: This deletes EVERY row in the table:</span>
+<span class="kw">DELETE FROM</span> Customer; <span class="cm">-- ← NO WHERE CLAUSE = ALL GONE</span>
+
+<span class="cm">-- DANGER: This deletes the whole table AND all its data:</span>
+<span class="kw">DROP TABLE</span> Customer;</pre>
+</div>
+
+<div class="box trap">
+  <div class="box-title">⚠️ Most Dangerous Commands in SQL</div>
+  <p><code>DELETE FROM Table</code> without WHERE → every row gone. <code>DROP TABLE</code> → entire table and data gone. <strong>Always run a SELECT first</strong> to preview exactly which rows would be affected before deleting.</p>
+</div>
+</div><!-- /s3 -->
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════
+     LECTURE 4
+═══════════════════════════════════════════════════════════ -->
+<div class="s4">
+<div class="lect-header" id="lect4">
+  <span class="lect-num ln4">LECTURE 04</span>
+  <h2>More CRUD — Scripts, Generated Columns, Foreign Keys &amp; WHERE</h2>
+</div>
+
+<h3>Running SQL Scripts</h3>
+<p>Instead of typing one command at a time, you write all your SQL in a <code>.sql</code> file and run the whole file at once. Commands run top-to-bottom. If one fails, everything stops at that line.</p>
+
+<div class="box warn">
+  <div class="box-title">⚠️ Script Rules to Remember</div>
+  <ul>
+    <li>Each command must end with a <strong>semicolon</strong></li>
+    <li>Execution stops at the <strong>first error</strong></li>
+    <li>Commands run <strong>instantly</strong> on the server — there's no "undo"</li>
+    <li>UniApps users: save scripts to <strong>OneDrive</strong></li>
+    <li>Comment out (<code>#</code>) lines you've already run to avoid re-running them</li>
+  </ul>
+</div>
+
+<h3>Generated Columns</h3>
+<p>A generated column is <strong>calculated automatically</strong> from other columns. You never insert a value for it — the database works it out for you every time other values change.</p>
+
+<div class="analogy">
+  <div class="analogy-title">🧠 Analogy</div>
+  <p>A spreadsheet formula like <code>=B2*C2</code> in cell D2. You put values in B2 and C2, and D2 automatically shows the result. A generated column works the same way — you provide the ingredients (quantity, price), the database calculates the result (total).</p>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 Example — TransactionItem with generated columns</div>
+  <pre><span class="kw">CREATE TABLE</span> TransactionItem (
+  id          <span class="fn">INT</span>   <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  description <span class="fn">VARCHAR</span>(<span class="num">255</span>) <span class="kw">NOT NULL</span>,
+  quantity    <span class="fn">INT</span>,
+  unitPrice   <span class="fn">FLOAT</span>,
+  hasGst      <span class="fn">BOOLEAN</span>    <span class="kw">DEFAULT</span> <span class="num">0</span>,
+  totalPrice  <span class="fn">FLOAT</span>      <span class="kw">GENERATED ALWAYS AS</span> (unitPrice * quantity) <span class="kw">STORED</span>,
+  taxAmount   <span class="fn">FLOAT</span>      <span class="kw">GENERATED ALWAYS AS</span> (hasGst * (unitPrice / <span class="num">11</span>)) <span class="kw">STORED</span>,
+  <span class="kw">PRIMARY KEY</span> (id)
+);</pre>
+  <p>If you insert: description="Widget", quantity=5, unitPrice=20.00, hasGst=1</p>
+  <div class="result-table">
+    <div class="result-table-label">What MySQL stores (totalPrice and taxAmount auto-calculated)</div>
+    <table>
+      <thead><tr><th>id</th><th>description</th><th>quantity</th><th>unitPrice</th><th>hasGst</th><th>totalPrice</th><th>taxAmount</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Widget</td><td>5</td><td>20.00</td><td>1</td><td><strong>100.00</strong></td><td><strong>1.82</strong></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>You never insert values for <code>totalPrice</code> or <code>taxAmount</code> — they're calculated. Use <code>DEFAULT</code> for them when inserting: <code>INSERT INTO TransactionItem VALUES (DEFAULT, "Widget", 5, 20.00, 1, DEFAULT, DEFAULT);</code></p>
+</div>
+
+<h3>DEFAULT and CHECK Constraints</h3>
+
+<div class="example">
+  <div class="example-title">💡 Example — Adding safety rules to a table</div>
+  <pre><span class="cm">-- 1. DEFAULT: if hasGst is not supplied, assume 0 (no tax)</span>
+<span class="kw">ALTER TABLE</span> TransactionItem <span class="kw">MODIFY COLUMN</span> hasGst <span class="fn">BOOLEAN</span> <span class="kw">DEFAULT</span> <span class="num">0</span>;
+
+<span class="cm">-- 2. CHECK: quantity must always be positive (can't sell -3 widgets)</span>
+<span class="kw">ALTER TABLE</span> TransactionItem <span class="kw">ADD CONSTRAINT</span> qCheck <span class="kw">CHECK</span> (quantity > <span class="num">0</span>);
+
+<span class="cm">-- 3. CHECK: price must be positive too</span>
+<span class="kw">ALTER TABLE</span> TransactionItem <span class="kw">ADD CONSTRAINT</span> priceCheck <span class="kw">CHECK</span> (unitPrice > <span class="num">0</span>);
+
+<span class="cm">-- Now try to insert an invalid row:</span>
+<span class="kw">INSERT INTO</span> TransactionItem (description, quantity, unitPrice) <span class="kw">VALUES</span>
+  (<span class="str">'Bad Item'</span>, -<span class="num">5</span>, <span class="num">10.00</span>);
+<span class="cm">-- ❌ ERROR: Check constraint 'qCheck' is violated.</span></pre>
+  <p>CHECK constraints act like bouncers — they reject any data that breaks the rules before it enters the table.</p>
+</div>
+
+<h3>Foreign Keys — Linking Tables</h3>
+
+<div class="box warn">
+  <div class="box-title">⚠️ Golden Rule</div>
+  <p>The <em>parent</em> table (the one being referenced) must <strong>exist first</strong>. You can't create a FK pointing to a table that doesn't exist yet. Create TransactionItem before Transaction if Transaction references TransactionItem.</p>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 Example — Invoice references Customer</div>
+  <pre><span class="cm">-- Create Customer FIRST (it's the parent)</span>
+<span class="kw">CREATE TABLE</span> Customer (
+  id       <span class="fn">INT</span>          <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  name     <span class="fn">VARCHAR</span>(<span class="num">100</span>) <span class="kw">NOT NULL</span>,
+  <span class="kw">PRIMARY KEY</span> (id)
+);
+
+<span class="cm">-- THEN create Invoice (it's the child, references Customer)</span>
+<span class="kw">CREATE TABLE</span> Invoice (
+  id         <span class="fn">INT</span>   <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  customerID <span class="fn">INT</span>,
+  amount     <span class="fn">FLOAT</span>,
+  <span class="kw">PRIMARY KEY</span> (id),
+  <span class="kw">CONSTRAINT</span> fk_cust <span class="kw">FOREIGN KEY</span> (customerID)
+    <span class="kw">REFERENCES</span> Customer(id)
+    <span class="kw">ON DELETE CASCADE</span>
+);</pre>
+  <p>Now if you try to insert an Invoice with customerID=99 but Customer id=99 doesn't exist — the database rejects it. This is referential integrity.</p>
+</div>
+
+<h4>Referential Actions — What Happens When a Parent Row Is Deleted?</h4>
+<table>
+  <thead><tr><th>Action</th><th>Effect</th><th>Best Used When…</th></tr></thead>
+  <tbody>
+    <tr><td><code>CASCADE</code></td><td>Also deletes the child rows automatically</td><td>Child rows are meaningless without the parent (e.g. delete order → delete order items)</td></tr>
+    <tr><td><code>SET NULL</code></td><td>Sets FK column to NULL in child rows</td><td>Child can still exist, just "unlinked" (e.g. delete employee → invoices stay, just have no assigned employee)</td></tr>
+    <tr><td><code>RESTRICT</code></td><td>Blocks the deletion of the parent if children exist</td><td>You must not delete a Customer who has active Invoices</td></tr>
+  </tbody>
+</table>
+
+<div class="example">
+  <div class="example-title">💡 CASCADE vs RESTRICT — Which to choose?</div>
+  <p>Scenario: You want to delete Customer "Alice Smith" who has 3 Invoices.</p>
+  <ul>
+    <li><strong>CASCADE:</strong> Alice is deleted → her 3 invoices are also deleted automatically. ✅ Good if invoices are meaningless without a customer. ❌ Bad if you need to keep financial records.</li>
+    <li><strong>RESTRICT:</strong> MySQL blocks the deletion and says "can't delete Alice, she has invoices." You must delete the invoices first. ✅ Good for protecting important financial data.</li>
+  </ul>
+</div>
+
+<h3>Complex WHERE Clauses</h3>
+<p>WHERE filters which rows are returned. You can make it as simple or complex as you like.</p>
+
+<h4>All Operators</h4>
+<table>
+  <thead><tr><th>Operator</th><th>Meaning</th><th>Example</th></tr></thead>
+  <tbody>
+    <tr><td><code>=</code></td><td>Exactly equal</td><td><code>WHERE id = 5</code></td></tr>
+    <tr><td><code>&gt;</code> / <code>&lt;</code></td><td>Greater / less than</td><td><code>WHERE price &gt; 100</code></td></tr>
+    <tr><td><code>&gt;=</code> / <code>&lt;=</code></td><td>Greater/less than or equal to</td><td><code>WHERE age &gt;= 18</code></td></tr>
+    <tr><td><code>&lt;&gt;</code> or <code>!=</code></td><td>Not equal to</td><td><code>WHERE status &lt;&gt; 'cancelled'</code></td></tr>
+    <tr><td><code>BETWEEN x AND y</code></td><td>Inclusive range (x and y are included)</td><td><code>WHERE price BETWEEN 10 AND 50</code></td></tr>
+    <tr><td><code>LIKE 'pattern%'</code></td><td>Pattern matching — <code>%</code> = any characters</td><td><code>WHERE name LIKE 'Ali%'</code> → matches Alice, Ali, Alisha</td></tr>
+    <tr><td><code>IN (a, b, c)</code></td><td>Value is one of the listed options</td><td><code>WHERE state IN ('WA', 'VIC', 'NSW')</code></td></tr>
+  </tbody>
+</table>
+
+<div class="example">
+  <div class="example-title">💡 Complex WHERE — Combining conditions</div>
+  <pre><span class="cm">-- Find all transactions in 2023 with a transactionItem > 2:</span>
+<span class="kw">SELECT</span> date, customerName
+<span class="kw">FROM</span> Transaction
+<span class="kw">WHERE</span> (transactionItem > <span class="num">2</span>)
+  <span class="kw">AND</span> (date <span class="kw">BETWEEN</span> <span class="str">'2023-01-01'</span> <span class="kw">AND</span> <span class="str">'2023-12-31'</span>);</pre>
+  <p>Starting data (all 4 rows):</p>
+  <div class="result-table">
+    <div class="result-table-label">Transaction table — before WHERE filter</div>
+    <table>
+      <thead><tr><th>id</th><th>date</th><th>customerName</th><th>transactionItem</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>2022-01-01</td><td>Example Corporation</td><td>4</td></tr>
+        <tr><td>2</td><td>2022-04-01</td><td>Nikola Limited</td><td>2</td></tr>
+        <tr><td>3</td><td>2023-04-01</td><td>Pear Computers</td><td>1</td></tr>
+        <tr><td>4</td><td>2023-07-31</td><td>Western Mining</td><td>3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>After the filter (transactionItem &gt; 2 AND year 2023): only row 4 (Western Mining, item=3, date=2023) qualifies. Row 1 has item=4 but it's in 2022. Row 3 is in 2023 but item=1 (not &gt;2).</p>
+  <div class="result-table">
+    <div class="result-table-label">Result after WHERE filter</div>
+    <table>
+      <thead><tr><th>date</th><th>customerName</th></tr></thead>
+      <tbody>
+        <tr><td>2023-07-31</td><td>Western Mining</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h3>Indexes</h3>
+<div class="analogy">
+  <div class="analogy-title">🧠 Analogy — Book Index</div>
+  <p>Without an index, finding "chapter about cats" in a 500-page book means reading every page. With a book index, you flip to "Cats — page 247" instantly. Database indexes work the same way — they let MySQL jump directly to matching rows instead of scanning the entire table.</p>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 Example — Adding an index to speed up email lookups</div>
+  <pre><span class="cm">-- Users log in via email — this column gets searched constantly.
+-- Adding an index makes those lookups much faster:</span>
+<span class="kw">CREATE UNIQUE INDEX</span> idx_email <span class="kw">ON</span> Customer(email);
+
+<span class="cm">-- Remove the index (doesn't affect the data or table):</span>
+<span class="kw">DROP INDEX</span> idx_email;</pre>
+  <p>Trade-off: Indexes <strong>speed up reads</strong> but use extra storage and slightly <strong>slow down writes</strong> (INSERT/UPDATE) because the index must be updated too.</p>
+</div>
+</div><!-- /s4 -->
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════
+     LECTURE 5
+═══════════════════════════════════════════════════════════ -->
+<div class="s5">
+<div class="lect-header" id="lect5">
+  <span class="lect-num ln5">LECTURE 05</span>
+  <h2>Sorting, Grouping &amp; Aggregation</h2>
+</div>
+
+<h3>USE Command &amp; Comments (Quick Tips)</h3>
+
+<div class="example">
+  <div class="example-title">💡 Start every SQL script like this</div>
+  <pre><span class="cm">/* =============================================
+   INMT5526 - Lab 3 - Student ID: 12345678
+   ============================================= */</span>
+
+<span class="kw">USE</span> <span class="ph">12345678_db</span>; <span class="cm">-- always run this first, once per session</span>
+
+<span class="cm">-- Question 1: Find all customers</span>
+<span class="kw">SELECT</span> * <span class="kw">FROM</span> Customer;
+
+<span class="cm"># Question 2: Count orders by month</span>
+<span class="kw">SELECT</span> <span class="fn">MONTH</span>(date), <span class="fn">COUNT</span>(id) <span class="kw">FROM</span> Transaction <span class="kw">GROUP BY</span> <span class="fn">MONTH</span>(date);</pre>
+  <p>All three comment styles demonstrated: <code>/* */</code> for the block header, <code>--</code> for inline, <code>#</code> for a line comment before a query. None of these lines are executed.</p>
+</div>
+
+<h3>SHOW CREATE TABLE — Seeing Everything About a Table</h3>
+
+<div class="example">
+  <div class="example-title">💡 Example — What SHOW CREATE TABLE reveals</div>
+  <pre><span class="kw">SHOW CREATE TABLE</span> Transaction;</pre>
+  <p>Output (what MySQL returns):</p>
+  <pre><span class="kw">CREATE TABLE</span> `Transaction` (
+  `id`              <span class="fn">int</span>         <span class="kw">NOT NULL AUTO_INCREMENT</span>,
+  `date`            <span class="fn">date</span>        <span class="kw">NOT NULL</span>,
+  `customerName`    <span class="fn">varchar</span>(<span class="num">99</span>) <span class="kw">NOT NULL</span>,
+  `transactionItem` <span class="fn">int</span>         <span class="kw">DEFAULT NULL</span>,
+  <span class="kw">PRIMARY KEY</span> (`id`),
+  <span class="kw">UNIQUE KEY</span> `TransactionIndex` (`id`),
+  <span class="kw">CONSTRAINT</span> `Transaction_ibfk_1`
+    <span class="kw">FOREIGN KEY</span> (`transactionItem`) <span class="kw">REFERENCES</span> `TransactionItem` (`id`)
+) <span class="kw">ENGINE</span>=InnoDB <span class="kw">AUTO_INCREMENT</span>=<span class="num">5</span></pre>
+  <p>Things revealed here that <code>SHOW COLUMNS</code> would NOT show:</p>
+  <ul>
+    <li>The <strong>FOREIGN KEY constraint</strong> linking transactionItem → TransactionItem.id</li>
+    <li><strong>AUTO_INCREMENT=5</strong> — tells you 4 rows exist; the next row will get id=5</li>
+    <li>The <strong>UNIQUE KEY</strong> index on id</li>
+    <li>The storage ENGINE (InnoDB) and character set</li>
+  </ul>
+</div>
+
+<h3>ORDER BY — Sorting Your Results</h3>
+
+<div class="analogy">
+  <div class="analogy-title">🧠 Analogy</div>
+  <p>Imagine you searched for "products" on an online store and got 200 results in a random order. That's a SELECT without ORDER BY. ORDER BY is the "Sort by: Price (Low to High)" button — it arranges the results in a meaningful way.</p>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 Example — Sorting the Transaction table</div>
+  <p>The table contains these 4 rows (insertion order):</p>
+  <div class="result-table">
+    <div class="result-table-label">Transaction — original insertion order (no sort)</div>
+    <table>
+      <thead><tr><th>id</th><th>date</th><th>customerName</th><th>transactionItem</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>2022-01-01</td><td>Example Corporation</td><td>4</td></tr>
+        <tr><td>2</td><td>2022-04-01</td><td>Nikola Limited</td><td>2</td></tr>
+        <tr><td>3</td><td>2023-04-01</td><td>Pear Computers</td><td>1</td></tr>
+        <tr><td>4</td><td>2023-07-31</td><td>Western Mining</td><td>3</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <pre><span class="cm">-- Sort by transactionItem ascending (1, 2, 3, 4)</span>
+<span class="kw">SELECT</span> customerName <span class="kw">FROM</span> Transaction <span class="kw">ORDER BY</span> transactionItem <span class="kw">ASC</span>;</pre>
+  <div class="result-table">
+    <div class="result-table-label">Result — sorted by transactionItem ASC</div>
+    <table>
+      <thead><tr><th>customerName</th></tr></thead>
+      <tbody>
+        <tr><td>Pear Computers (item 1)</td></tr>
+        <tr><td>Nikola Limited (item 2)</td></tr>
+        <tr><td>Western Mining (item 3)</td></tr>
+        <tr><td>Example Corporation (item 4)</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>Notice: we SELECTed <code>customerName</code> but sorted by <code>transactionItem</code> — this is perfectly valid. You can sort by any column, even ones you didn't SELECT.</p>
+</div>
+
+<div class="example">
+  <div class="example-title">💡 Example — Multi-column sort</div>
+  <pre><span class="cm">-- Sort by year first, then within each year, sort by name A→Z</span>
+<span class="kw">SELECT</span> date, customerName
+<span class="kw">FROM</span> Transaction
+<span class="kw">ORDER BY</span> <span class="fn">YEAR</span>(date) <span class="kw">ASC</span>, customerName <span class="kw">ASC</span>;</pre>
+  <div class="result-table">
+    <div class="result-table-label">Result — 2022 rows first (alphabetical within year), then 2023</div>
+    <table>
+      <thead><tr><th>date</th><th>customerName</th></tr></thead>
+      <tbody>
+        <tr><td>2022-01-01</td><td>Example Corporation</td></tr>
+        <tr><td>2022-04-01</td><td>Nikola Limited</td></tr>
+        <tr><td>2023-04-01</td><td>Pear Computers</td></tr>
+        <tr><td>2023-07-31</td><td>Western Mining</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h3>GROUP BY — Grouping &amp; Summarising</h3>
+
+<div class="analogy">
+  <div class="analogy-title">🧠 Analogy — Sorting a pile of receipts</div>
+  <p>Imagine you have 100 receipts from different shops. You sort them into piles by shop name. Now for each pile (group), you can ask: "How many receipts in this pile?" (COUNT) or "What was the biggest purchase?" (MAX). That's exactly what GROUP BY does — it makes the piles, and aggregate functions answer questions about each pile.</p>
+</div>
+
+<div class="clause-order">
+  <span class="clause c-select">SELECT</span>
+  <span class="clause-arrow">→</span>
+  <span class="clause c-from">FROM</span>
+  <span class="clause-arrow">→</span>
+  <span class="clause c-where">WHERE</span>
+  <span class="clause-arrow">→</span>
+  <span class="clause c-group">GROUP BY</span>
+  <span class="clause-arrow">→</span>
+  <span class="clause c-order">ORDER BY</span>
+  <span class="clause-note">Mandatory order — getting this wrong = syntax error. WHERE always before GROUP BY. GROUP BY always before ORDER BY.</span>
+</div>
+
+<div class="box trap">
+  <div class="box-title">⚠️ The Most Important Rule in GROUP BY</div>
+  <p>In a GROUP BY query, your SELECT list may <strong>only contain:</strong></p>
+  <ol>
+    <li>Columns listed in the GROUP BY clause</li>
+    <li>Aggregate functions (AVG, MIN, MAX, SUM, COUNT)</li>
+  </ol>
+  <p><strong>Why?</strong> When 10 rows collapse into one group, any non-grouped column could have 10 different values — MySQL doesn't know which one to show, so it errors.</p>
+</div>
+
+<h3>The 5 Aggregate Functions</h3>
+
+<div class="example">
+  <div class="example-title">💡 All 5 functions demonstrated on the TransactionItem table</div>
+  <p>Assume this is the TransactionItem table:</p>
+  <div class="result-table">
+    <div class="result-table-label">TransactionItem — source data</div>
+    <table>
+      <thead><tr><th>id</th><th>description</th><th>quantity</th><th>unitPrice</th><th>hasGst</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>Laptop</td><td>2</td><td>899.00</td><td>1</td></tr>
+        <tr><td>2</td><td>Mouse</td><td>5</td><td>25.00</td><td>0</td></tr>
+        <tr><td>3</td><td>Keyboard</td><td>3</td><td>75.00</td><td>0</td></tr>
+        <tr><td>4</td><td>Monitor</td><td>1</td><td>450.00</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <pre><span class="kw">SELECT</span>
+  hasGst,
+  <span class="fn">COUNT</span>(id)        <span class="kw">AS</span> numItems,
+  <span class="fn">AVG</span>(unitPrice)   <span class="kw">AS</span> avgPrice,
+  <span class="fn">MIN</span>(unitPrice)   <span class="kw">AS</span> cheapest,
+  <span class="fn">MAX</span>(unitPrice)   <span class="kw">AS</span> mostExpensive,
+  <span class="fn">SUM</span>(unitPrice)   <span class="kw">AS</span> totalPrice
+<span class="kw">FROM</span> TransactionItem
+<span class="kw">GROUP BY</span> hasGst;</pre>
+  <div class="result-table">
+    <div class="result-table-label">Result — one row per hasGst group</div>
+    <table>
+      <thead><tr><th>hasGst</th><th>numItems</th><th>avgPrice</th><th>cheapest</th><th>mostExpensive</th><th>totalPrice</th></tr></thead>
+      <tbody>
+        <tr><td>0 (no tax)</td><td>2</td><td>50.00</td><td>25.00</td><td>75.00</td><td>100.00</td></tr>
+        <tr><td>1 (has tax)</td><td>2</td><td>674.50</td><td>450.00</td><td>899.00</td><td>1349.00</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The group <code>hasGst=0</code> contains Mouse ($25) and Keyboard ($75). The group <code>hasGst=1</code> contains Laptop ($899) and Monitor ($450). Notice <code>hasGst</code> appears in both SELECT and GROUP BY — so you can tell which result row belongs to which group.</p>
+</div>
+
+<div class="box trap">
+  <div class="box-title">⚠️ NULL Behaviour in Aggregation</div>
+  <p>All aggregate functions <strong>skip NULL values</strong>. Example: if a column has values [10, NULL, 20, NULL, 30], then:</p>
+  <ul>
+    <li><code>COUNT(col)</code> = 3 (counts only non-NULL)</li>
+    <li><code>COUNT(*)</code> = 5 (counts all rows including NULLs)</li>
+    <li><code>SUM(col)</code> = 60 (adds only the non-NULL values)</li>
+    <li><code>AVG(col)</code> = 20 (60 ÷ 3, not 60 ÷ 5)</li>
+  </ul>
+  <p>This can significantly affect your results when data has missing values!</p>
+</div>
+
+<h3>Date Functions in Grouping</h3>
+
+<div class="example">
+  <div class="example-title">💡 Example — Sales grouped by month and year</div>
+  <p>Without date functions, grouping by <code>date</code> gives one group per exact date (too granular). Date functions let you group by just the month or year.</p>
+  <pre><span class="cm">-- Count how many transactions happened in each month of each year</span>
+<span class="kw">SELECT</span>
+  <span class="fn">YEAR</span>(date)  <span class="kw">AS</span> year,
+  <span class="fn">MONTH</span>(date) <span class="kw">AS</span> month,
+  <span class="fn">COUNT</span>(id)   <span class="kw">AS</span> numTransactions
+<span class="kw">FROM</span> Transaction
+<span class="kw">GROUP BY</span> <span class="fn">YEAR</span>(date), <span class="fn">MONTH</span>(date)
+<span class="kw">ORDER BY</span> <span class="fn">YEAR</span>(date) <span class="kw">ASC</span>, <span class="fn">MONTH</span>(date) <span class="kw">ASC</span>;</pre>
+  <div class="result-table">
+    <div class="result-table-label">Result</div>
+    <table>
+      <thead><tr><th>year</th><th>month</th><th>numTransactions</th></tr></thead>
+      <tbody>
+        <tr><td>2022</td><td>1</td><td>1</td></tr>
+        <tr><td>2022</td><td>4</td><td>1</td></tr>
+        <tr><td>2023</td><td>4</td><td>1</td></tr>
+        <tr><td>2023</td><td>7</td><td>1</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<h3>Full Complex Query — All Clauses Together</h3>
+
+<div class="example">
+  <div class="example-title">💡 The Lecture's Most Complex Example — Broken Down</div>
+  <pre><span class="kw">SELECT</span>
+  department,
+  <span class="fn">MONTH</span>(date),
+  <span class="fn">YEAR</span>(date),
+  <span class="fn">COUNT</span>(id)        <span class="kw">AS</span> numSales,
+  <span class="fn">MIN</span>(salePrice)   <span class="kw">AS</span> cheapestSale
+<span class="kw">FROM</span> ExampleTable
+<span class="kw">WHERE</span> department <span class="kw">LIKE</span> <span class="str">'SALES %'</span>
+<span class="kw">GROUP BY</span> department, <span class="fn">MONTH</span>(date), <span class="fn">YEAR</span>(date)
+<span class="kw">ORDER BY</span> <span class="fn">MIN</span>(salePrice) <span class="kw">DESC</span>;</pre>
+
+  <p>Step by step — what MySQL does internally:</p>
+  <ol class="steps">
+    <li><div><strong>FROM ExampleTable</strong> — load all rows from the table</div></li>
+    <li><div><strong>WHERE department LIKE 'SALES %'</strong> — filter: only keep rows where department starts with "SALES ". This happens BEFORE grouping.</div></li>
+    <li><div><strong>GROUP BY department, MONTH(date), YEAR(date)</strong> — group remaining rows. Every unique combination of (department, month, year) becomes one result row. If SALES-NORTH sold in Jan 2023 and Feb 2023, those are two separate groups.</div></li>
+    <li><div><strong>SELECT — calculate aggregates for each group:</strong> COUNT(id) = how many sales, MIN(salePrice) = cheapest sale price in that group.</div></li>
+    <li><div><strong>ORDER BY MIN(salePrice) DESC</strong> — sort the result groups: the group with the highest minimum sale price appears first.</div></li>
+  </ol>
+</div>
+
+<h3>AS Aliases, WITH ROLLUP</h3>
+
+<div class="example">
+  <div class="example-title">💡 WITH ROLLUP — Adding a grand total row</div>
+  <pre><span class="kw">SELECT</span> <span class="fn">YEAR</span>(date) <span class="kw">AS</span> yr, <span class="fn">SUM</span>(amount) <span class="kw">AS</span> totalSales
+<span class="kw">FROM</span> Invoice
+<span class="kw">GROUP BY</span> <span class="fn">YEAR</span>(date) <span class="kw">WITH ROLLUP</span>;</pre>
+  <div class="result-table">
+    <div class="result-table-label">Result — note the NULL row at the bottom = grand total</div>
+    <table>
+      <thead><tr><th>yr</th><th>totalSales</th></tr></thead>
+      <tbody>
+        <tr><td>2022</td><td>$5,200.00</td></tr>
+        <tr><td>2023</td><td>$8,750.00</td></tr>
+        <tr><td><strong>NULL</strong></td><td><strong>$13,950.00</strong> ← grand total for ALL years</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p>The NULL in the <code>yr</code> column of the last row means "this is not one specific year — this is ALL years combined." It's the grand total row added by WITH ROLLUP.</p>
+</div>
+</div><!-- /s5 -->
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════
+     CHECKLIST
+═══════════════════════════════════════════════════════════ -->
+<div id="checklist">
+<div class="lect-header">
+  <span class="lect-num" style="background:#333;">CHECKLIST</span>
+  <h2>Master Revision Checklist</h2>
+</div>
+
+<div class="summary-grid">
+  <div class="sc sc-l1"><div class="sc-label">L1 · BI Concepts</div><ul>
+    <li>5 analytics levels (order &amp; meaning)</li>
+    <li>Report vs Dashboard distinction</li>
+    <li>Dataset vs Dataflow</li>
+    <li>Filter vs Highlight</li>
+    <li>Drill down vs Drill through</li>
+  </ul></div>
+  <div class="sc sc-l2"><div class="sc-label">L2 · Databases</div><ul>
+    <li>DB vs spreadsheet (3 advantages)</li>
+    <li>All 8 database types</li>
+    <li>PK vs FK with examples</li>
+    <li>All 4 cardinalities + examples</li>
+    <li>M:M needs a linking table</li>
+    <li>5 database design steps</li>
+    <li>Read an ER diagram</li>
+  </ul></div>
+  <div class="sc sc-l3"><div class="sc-label">L3 · SQL Basics</div><ul>
+    <li>CRUD — 4 ops + SQL commands</li>
+    <li>ACID — 4 principles plain English</li>
+    <li>Data types + VARCHAR vs CHAR</li>
+    <li>CREATE TABLE syntax</li>
+    <li>All ALTER TABLE variants</li>
+    <li>DELETE without WHERE danger</li>
+  </ul></div>
+  <div class="sc sc-l4"><div class="sc-label">L4 · More CRUD</div><ul>
+    <li>Generated cols: VIRTUAL vs STORED</li>
+    <li>DEFAULT and CHECK constraints</li>
+    <li>FK parent-must-exist rule</li>
+    <li>CASCADE vs RESTRICT decision</li>
+    <li>All 7 WHERE operators</li>
+    <li>AND / OR / NOT usage</li>
+    <li>Indexes — purpose + trade-offs</li>
+  </ul></div>
+  <div class="sc sc-l5"><div class="sc-label">L5 · Sort/Group/Agg</div><ul>
+    <li>USE — once per session</li>
+    <li>3 comment styles</li>
+    <li>SHOW CREATE TABLE vs SHOW COLUMNS</li>
+    <li>Clause order: S→F→W→G→O</li>
+    <li>SELECT rule in GROUP BY</li>
+    <li>5 aggregate functions + NULLs</li>
+    <li>MONTH() YEAR() NOW()</li>
+    <li>AS aliases + WITH ROLLUP</li>
+  </ul></div>
+</div>
+
+<h3 style="margin-top:28px;">Full Checklist</h3>
+<ul class="checklist">
+  <li><span class="cb"></span>I can name &amp; explain all 5 analytics levels and give a real example of each.</li>
+  <li><span class="cb"></span>I can explain the difference between a Report and a Dashboard (structure and purpose).</li>
+  <li><span class="cb"></span>I can explain Filter vs Highlight, and Drill Down vs Drill Through.</li>
+  <li><span class="cb"></span>I know 3 ways a database beats a spreadsheet — and 1 way a spreadsheet wins.</li>
+  <li><span class="cb"></span>I can name and describe at least 6 different database types.</li>
+  <li><span class="cb"></span>I can explain PK and FK with a real example (Customer → Invoice).</li>
+  <li><span class="cb"></span>I know all 4 cardinalities and can give an example of each. I know M:M needs a linking table.</li>
+  <li><span class="cb"></span>I can list the 5 database design steps in order.</li>
+  <li><span class="cb"></span>I can read and draw a basic ER diagram in Chen notation.</li>
+  <li><span class="cb"></span>I know CRUD — the 4 operations and the SQL command for each.</li>
+  <li><span class="cb"></span>I know ACID — all 4 principles in plain English with the ATM analogy.</li>
+  <li><span class="cb"></span>I know all major MySQL data types and can choose the right one for a scenario.</li>
+  <li><span class="cb"></span>I understand VARCHAR vs CHAR and when to use each.</li>
+  <li><span class="cb"></span>I can write a complete CREATE TABLE statement with types, modifiers, and a PK.</li>
+  <li><span class="cb"></span>I can use all ALTER TABLE variants (ADD, DROP, MODIFY, RENAME, CHANGE).</li>
+  <li><span class="cb"></span>I know the danger of DELETE without WHERE and DROP TABLE.</li>
+  <li><span class="cb"></span>I can explain and write a generated column (GENERATED ALWAYS AS) and know VIRTUAL vs STORED.</li>
+  <li><span class="cb"></span>I can add DEFAULT and CHECK constraints and know the difference.</li>
+  <li><span class="cb"></span>I know the FK creation rule (parent must exist first).</li>
+  <li><span class="cb"></span>I can choose between CASCADE, SET NULL, and RESTRICT and justify my choice.</li>
+  <li><span class="cb"></span>I know all 7 WHERE operators and can write examples of each.</li>
+  <li><span class="cb"></span>I can combine WHERE conditions with AND, OR, NOT and use brackets.</li>
+  <li><span class="cb"></span>I can explain what an index does, its trade-offs, and write CREATE/DROP INDEX.</li>
+  <li><span class="cb"></span>I know the USE command rules — once per session, no way to cancel, best practice placement.</li>
+  <li><span class="cb"></span>I know all 3 SQL comment styles and can use them appropriately.</li>
+  <li><span class="cb"></span>I know what SHOW CREATE TABLE reveals vs SHOW COLUMNS (constraints, FKs, generated cols).</li>
+  <li><span class="cb"></span>I know the mandatory clause order: SELECT → FROM → WHERE → GROUP BY → ORDER BY.</li>
+  <li><span class="cb"></span>I can explain the SELECT rule in GROUP BY — why only grouped columns and aggregates.</li>
+  <li><span class="cb"></span>I know all 5 aggregate functions, what data types they work on, and how NULLs affect them.</li>
+  <li><span class="cb"></span>I understand COUNT(col) vs COUNT(*) and when each is needed.</li>
+  <li><span class="cb"></span>I can use MONTH() and YEAR() in both SELECT and GROUP BY parts of a query.</li>
+  <li><span class="cb"></span>I can use AS to rename output columns and WITH ROLLUP to add a grand total row.</li>
+</ul>
+</div>
+
+<hr>
+
+<!-- ══════════════════════════════════════════════════════════
+     EXAM QUESTIONS
+═══════════════════════════════════════════════════════════ -->
+<div id="examqs">
+<div class="lect-header">
+  <span class="lect-num" style="background:#333;">EXAM Qs</span>
+  <h2>15 Possible Exam Questions</h2>
+</div>
+
+<div class="eq"><span class="eq-n">1</span><div><div class="eq-type">Definition · L1</div><div class="eq-q">Explain the difference between Predictive and Prescriptive analytics. Give a real business example of each.</div></div></div>
+<div class="eq"><span class="eq-n">2</span><div><div class="eq-type">Definition · L1</div><div class="eq-q">What is the difference between a Report and a Dashboard? What structural rule must a Dashboard follow?</div></div></div>
+<div class="eq"><span class="eq-n">3</span><div><div class="eq-type">Comparison · L2</div><div class="eq-q">List three ways a relational database is superior to a spreadsheet. Name one scenario where a spreadsheet might be the better choice.</div></div></div>
+<div class="eq"><span class="eq-n">4</span><div><div class="eq-type">Definition · L2</div><div class="eq-q">Define Primary Key and Foreign Key. Using the Customer and Invoice tables as an example, explain how a Foreign Key creates a relationship.</div></div></div>
+<div class="eq"><span class="eq-n">5</span><div><div class="eq-type">Scenario · L2</div><div class="eq-q">A university has Students and Courses. Each student can enrol in many courses, and each course can have many students. What is this relationship type called, and how is it implemented in a relational database?</div></div></div>
+<div class="eq"><span class="eq-n">6</span><div><div class="eq-type">SQL Writing · L3</div><div class="eq-q">Write a CREATE TABLE statement for an Employee table with: auto-incrementing ID, required full name (up to 100 chars), nullable date of birth, required decimal salary, and a boolean "isActive" column that defaults to true.</div></div></div>
+<div class="eq"><span class="eq-n">7</span><div><div class="eq-type">Short Answer · L3</div><div class="eq-q">What are the four ACID properties? Briefly explain each one using an ATM transaction as your example.</div></div></div>
+<div class="eq"><span class="eq-n">8</span><div><div class="eq-type">SQL Writing · L4</div><div class="eq-q">Write the SQL to add a Foreign Key on an existing Orders table, linking its customerID column to the id column of the Customer table. Include an appropriate referential action. What must be true about the Customer table first?</div></div></div>
+<div class="eq"><span class="eq-n">9</span><div><div class="eq-type">Scenario · L4</div><div class="eq-q">You define ON DELETE CASCADE on a FK from Orders to Customer. A customer is then deleted. What happens to their orders? Describe a scenario where RESTRICT would be more appropriate.</div></div></div>
+<div class="eq"><span class="eq-n">10</span><div><div class="eq-type">SQL Writing · L4</div><div class="eq-q">Using the Transaction table (columns: id, date, customerName, transactionItem), write a query to return the names and dates of all transactions where transactionItem is greater than 2 AND the date falls within 2023.</div></div></div>
+<div class="eq"><span class="eq-n">11</span><div><div class="eq-type">Short Answer · L5</div><div class="eq-q">What does SHOW CREATE TABLE show that SHOW COLUMNS FROM does not? Name at least two specific things.</div></div></div>
+<div class="eq"><span class="eq-n">12</span><div><div class="eq-type">SQL Writing · L5</div><div class="eq-q">Using TransactionItem (columns: id, description, unitPrice, hasGst), write a query to find the total sum and average unitPrice grouped by hasGst. Show the column names as "totalRevenue" and "avgPrice". Sort so hasGst=1 appears first.</div></div></div>
+<div class="eq"><span class="eq-n">13</span><div><div class="eq-type">SQL Debugging · L5</div><div class="eq-q">This query causes an error: <code>SELECT department, employeeName, COUNT(id) FROM Sales GROUP BY department;</code>. Explain what is wrong and write the corrected query.</div></div></div>
+<div class="eq"><span class="eq-n">14</span><div><div class="eq-type">SQL Writing · L5</div><div class="eq-q">Write a query on a Sales table (columns: id, department, saleDate, salePrice) that shows the number of sales and minimum sale price for each department per year, for departments starting with "RETAIL", sorted by year ascending then department alphabetically.</div></div></div>
+<div class="eq"><span class="eq-n">15</span><div><div class="eq-type">Conceptual · L5</div><div class="eq-q">Explain WITH ROLLUP. What does the NULL value in the grouping column of the extra row represent? If a table had sales in 2021, 2022, and 2023, describe what the output of a GROUP BY YEAR WITH ROLLUP query would look like.</div></div></div>
+</div>
+
+</div><!-- /container -->
+<footer>INMT5526 Business Intelligence · All 5 Lectures · Tristan W. Reed · UWA Business School</footer>
+</body>
+</html>
