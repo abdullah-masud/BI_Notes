@@ -372,6 +372,18 @@
             background: var(--l9);
         }
 
+        .s10 h3::before {
+            background: #2d6b8a;
+        }
+
+        .s11 h3::before {
+            background: #6b2d2d;
+        }
+
+        .s12 h3::before {
+            background: #2d5a2d;
+        }
+
         h4 {
             font-size: 12px;
             font-weight: 600;
@@ -884,6 +896,9 @@
         <a class="lect7" href="#lect7">L7 · BI Tools</a>
         <a class="lect8" href="#lect8">L8 · Programming &amp; BI</a>
         <a class="lect9" href="#lect9">L9 · Data Workflows &amp; Vis</a>
+        <a style="color:#93d4ff" href="#lect10">L10 · Non-Relational DBs</a>
+        <a style="color:#ffb393" href="#lect11">L11 · Security &amp; Ethics</a>
+        <a style="color:#b4ff93" href="#lect12">L12 · Future &amp; Revision</a>
         <a href="#checklist">✓ Checklist</a>
         <a href="#examqs">📝 Exam Qs</a>
     </nav>
@@ -903,6 +918,15 @@
             <span class="pill l7">L7 · History of BI Tools &amp; Power BI</span>
             <span class="pill l8">L8 · Programming, Connection Types &amp; Spatial BI</span>
             <span class="pill l9">L9 · Data Workflows, Visualisation Theory &amp; MECE</span>
+            <span class="pill"
+                style="color:#93d4ff;border-color:rgba(147,212,255,.3);background:rgba(147,212,255,.08);">L10 · MongoDB
+                &amp; Graph Databases</span>
+            <span class="pill"
+                style="color:#ffb393;border-color:rgba(255,179,147,.3);background:rgba(255,179,147,.08);">L11 ·
+                Security, Ethics &amp; Privacy</span>
+            <span class="pill"
+                style="color:#b4ff93;border-color:rgba(180,255,147,.3);background:rgba(180,255,147,.08);">L12 · Future
+                of Databases &amp; Revision</span>
         </div>
     </div>
 
@@ -1249,7 +1273,8 @@
                 </div>
                 <p>Invoice 101 and 102 both have <code>customerID = 1</code>, meaning Alice Smith made both those
                     purchases. The FK <em>links</em> back to the Customer table via Alice's PK (id = 1). This is a
-                    <strong>1 Customer → Many Invoices</strong> relationship (1:M).</p>
+                    <strong>1 Customer → Many Invoices</strong> relationship (1:M).
+                </p>
             </div>
 
             <h3>Relationship Cardinalities</h3>
@@ -1367,7 +1392,8 @@ customerName                       quantity
                                    taxAmount (generated)
                                    transaction (FK → Transaction.id)</span></pre>
                 <p>One Transaction can have many TransactionItems (e.g. one invoice with multiple line items). The FK
-                    <code>transaction</code> in TransactionItem points back to the Transaction it belongs to.</p>
+                    <code>transaction</code> in TransactionItem points back to the Transaction it belongs to.
+                </p>
             </div>
 
             <h3>Database Design Steps (Memorise These)</h3>
@@ -1580,7 +1606,8 @@ postcode     <span class="fn">CHAR</span>(<span class="num">4</span>)         <s
 );</pre>
                 <p>Reading this column by column: <code>id</code> is a whole number, always required, auto-assigned.
                     <code>fullName</code> is text up to 100 chars, always required. <code>birthDate</code> is optional
-                    (nullable). <code>isActive</code> defaults to 1 (true) if not specified.</p>
+                    (nullable). <code>isActive</code> defaults to 1 (true) if not specified.
+                </p>
             </div>
 
             <h3>ALTER TABLE — Modifying an Existing Table</h3>
@@ -2304,7 +2331,8 @@ postcode     <span class="fn">CHAR</span>(<span class="num">4</span>)         <s
                 </div>
                 <p>The group <code>hasGst=0</code> contains Mouse ($25) and Keyboard ($75). The group
                     <code>hasGst=1</code> contains Laptop ($899) and Monitor ($450). Notice <code>hasGst</code> appears
-                    in both SELECT and GROUP BY — so you can tell which result row belongs to which group.</p>
+                    in both SELECT and GROUP BY — so you can tell which result row belongs to which group.
+                </p>
             </div>
 
             <div class="box trap">
@@ -2766,7 +2794,8 @@ postcode     <span class="fn">CHAR</span>(<span class="num">4</span>)         <s
                         blank, NULL.</li>
                     <li><strong>Always prefix column names</strong> with the table name when both tables share column
                         names (e.g. both have <code>id</code>): write <code>Customer.id</code>, not just
-                        <code>id</code>.</li>
+                        <code>id</code>.
+                    </li>
                     <li><strong>UNION</strong> (combining all rows from both tables) is briefly mentioned but not
                         required for this unit.</li>
                 </ul>
@@ -2824,7 +2853,8 @@ postcode     <span class="fn">CHAR</span>(<span class="num">4</span>)         <s
   <span class="kw">GROUP BY</span> AttributeThree
   <span class="kw">ORDER BY</span> AttributeThree <span class="kw">DESC</span>;</pre>
                 <p>After creating these, you can query any of them exactly like a table:
-                    <code>SELECT * FROM ExampleViewThree;</code></p>
+                    <code>SELECT * FROM ExampleViewThree;</code>
+                </p>
             </div>
 
             <div class="example">
@@ -2952,7 +2982,8 @@ postcode     <span class="fn">CHAR</span>(<span class="num">4</span>)         <s
                 <p>Breaking this down:</p>
                 <ul>
                     <li><code>ST_Distance_Sphere(pointA, pointB)</code> — calculates the distance in
-                        <strong>metres</strong> between two points on Earth's surface</li>
+                        <strong>metres</strong> between two points on Earth's surface
+                    </li>
                     <li><code>10 * 1000</code> — converts 10 kilometres to 10,000 metres (the function uses metres)</li>
                     <li>The result only includes rows where the distance is ≤ 10,000m from Perth CBD</li>
                 </ul>
@@ -3417,7 +3448,8 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                     <li>The measure name is on the left of the <code>=</code></li>
                 </ul>
                 <p>DAX measures update <em>dynamically</em> — if a user filters the report to show only January,
-                    <code>Total Units Sold</code> automatically recalculates for January only.</p>
+                    <code>Total Units Sold</code> automatically recalculates for January only.
+                </p>
             </div>
 
             <div class="box def">
@@ -3563,7 +3595,8 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                         <td><strong>Visualisations</strong></td>
                         <td>~35 built-in chart types, interactive</td>
                         <td>Unlimited chart types via matplotlib/seaborn — highly customisable but
-                            <strong>static</strong> (not interactive)</td>
+                            <strong>static</strong> (not interactive)
+                        </td>
                     </tr>
                     <tr>
                         <td><strong>Customisability</strong></td>
@@ -4538,7 +4571,8 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                 <em>connected</em> web data source. Power BI parameters (<code>StockCode</code>) are used to generalise
                 the query across all five companies without duplicating it five times. The workflow involves: API key →
                 Power BI Web connector → parameters → Convert to table → Transpose → Use first row as headers → Join
-                with Stocks and Dates tables → Build visuals.</p>
+                with Stocks and Dates tables → Build visuals.
+            </p>
 
             <div class="box tip">
                 <div class="box-title">💡 Real-world problem: API rate limits</div>
@@ -4552,13 +4586,767 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
 
         <hr>
 
+        <div class="s10">
+            <div class="lect-header" id="lect10">
+                <span class="lect-num"
+                    style="background:#2d6b8a; color:#fff; font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500; padding:6px 12px; border-radius:4px; white-space:nowrap;">LECTURE
+                    10</span>
+                <h2 style="font-family:'Playfair Display',serif; font-size:clamp(22px,4vw,32px); font-weight:700;">
+                    Non-Relational Databases — MongoDB &amp; Graph Databases</h2>
+            </div>
+
+            <h3
+                style="font-size:17px;font-weight:600;color:var(--text);margin:30px 0 10px;display:flex;align-items:center;gap:10px;">
+                <span
+                    style="display:inline-block;width:4px;height:18px;border-radius:2px;flex-shrink:0;background:#2d6b8a;"></span>
+                Quick Revision — Key Differences Between Database Types
+            </h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Question</th>
+                        <th>Answer</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Main difference: NoSQL vs Relational?</td>
+                        <td>NoSQL databases have <strong>no fixed schema</strong> — each record/document can have
+                            different
+                            fields. Relational databases require every row to share the same columns.</td>
+                    </tr>
+                    <tr>
+                        <td>Main difference: Document DB vs Relational?</td>
+                        <td>Data is not stored in tables but in multiple queryable <strong>documents</strong> (like JSON
+                            objects), each of which is a record.</td>
+                    </tr>
+                    <tr>
+                        <td>Is a document DB always NoSQL?</td>
+                        <td>Yes — in practice, document databases are NoSQL. But NoSQL is broader: not all NoSQL
+                            databases
+                            are document-based.</td>
+                    </tr>
+                    <tr>
+                        <td>When to use a graph database?</td>
+                        <td>When the <strong>relationships between entities</strong> are the most important element —
+                            e.g.
+                            social networks, recommendation engines, fraud detection.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3
+                style="font-size:17px;font-weight:600;color:var(--text);margin:30px 0 10px;display:flex;align-items:center;gap:10px;">
+                <span
+                    style="display:inline-block;width:4px;height:18px;border-radius:2px;flex-shrink:0;background:#2d6b8a;"></span>
+                MongoDB — A Document (NoSQL) Database
+            </h3>
+            <p>MongoDB stores data as <strong>documents</strong> — JSON-like objects where each document can have
+                completely
+                different fields. Think of it as storing a filing cabinet of index cards where every card can have
+                different
+                information written on it.</p>
+
+            <div class="analogy">
+                <div class="analogy-title">🧠 Analogy — Excel vs Word documents</div>
+                <p>A relational database is like an Excel spreadsheet — every row has the same columns. MongoDB is like
+                    a
+                    folder of Word documents — each one can contain completely different content and structure. This
+                    flexibility is the main advantage of document databases.</p>
+            </div>
+
+            <div class="box def">
+                <div class="box-title">📌 MongoDB Terminology vs MySQL</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>MySQL (Relational)</th>
+                            <th>MongoDB (Document)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Database</td>
+                            <td>Database</td>
+                        </tr>
+                        <tr>
+                            <td>Table</td>
+                            <td>Collection</td>
+                        </tr>
+                        <tr>
+                            <td>Row / Record</td>
+                            <td>Document</td>
+                        </tr>
+                        <tr>
+                            <td>Column / Attribute</td>
+                            <td>Field</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h3
+                style="font-size:17px;font-weight:600;color:var(--text);margin:30px 0 10px;display:flex;align-items:center;gap:10px;">
+                <span
+                    style="display:inline-block;width:4px;height:18px;border-radius:2px;flex-shrink:0;background:#2d6b8a;"></span>
+                MongoDB CRUD Commands
+            </h3>
+
+            <div class="example">
+                <div class="example-title">💡 Creating a Collection and Inserting Documents</div>
+                <pre><span class="cm">// Create a collection (equivalent to CREATE TABLE in MySQL)</span>
+db.createCollection(<span class="str">"transactions"</span>)
+
+<span class="cm">// Insert one document (preferred: insertOne)</span>
+db.transactions.insertOne({
+  id: <span class="num">1</span>,
+  description: <span class="str">"Basic Widget"</span>,
+  quantity: <span class="num">1</span>,
+  unitPrice: <span class="num">123.45</span>,
+  totalPrice: <span class="num">123.45</span>,
+  hasGst: <span class="kw">true</span>
+})
+
+<span class="cm">// Insert multiple documents at once (preferred: insertMany)</span>
+db.transactions.insertMany([
+  { id: <span class="num">2</span>, description: <span class="str">"Advanced Widget"</span>, quantity: <span class="num">5</span>, unitPrice: <span class="num">25.00</span>, hasGst: <span class="kw">false</span> },
+  { id: <span class="num">3</span>, description: <span class="str">"Premium Widget"</span>, quantity: <span class="num">2</span>, unitPrice: <span class="num">75.00</span>, hasGst: <span class="kw">true</span>  }
+])</pre>
+                <p>Notice: unlike MySQL, there's no schema — you don't define columns upfront. Each document can have
+                    different fields. <code>hasGst: true</code> is a real Boolean (not 0/1 like MySQL).</p>
+            </div>
+
+            <div class="example">
+                <div class="example-title">💡 Reading / Querying Documents — .find()</div>
+                <pre><span class="cm">// Find ALL documents in a collection — use .pretty() for readable output</span>
+db.transactions.find().pretty()
+
+<span class="cm">// Find where id equals 1</span>
+db.transactions.find({ id: <span class="num">1</span> })
+
+<span class="cm">// Find where unitPrice is less than 100</span>
+db.transactions.find({ unitPrice: { <span class="fn">$lt</span>: <span class="num">100</span> } }).pretty()
+
+<span class="cm">// Find where hasGst is NOT false (i.e. has GST)</span>
+db.transactions.find({ hasGst: { <span class="fn">$ne</span>: <span class="kw">false</span> } }).pretty()</pre>
+            </div>
+
+            <h3
+                style="font-size:17px;font-weight:600;color:var(--text);margin:30px 0 10px;display:flex;align-items:center;gap:10px;">
+                <span
+                    style="display:inline-block;width:4px;height:18px;border-radius:2px;flex-shrink:0;background:#2d6b8a;"></span>
+                MongoDB Query Operators
+            </h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>MySQL Equivalent</th>
+                        <th>MongoDB Operator</th>
+                        <th>Example</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><code>&lt;</code></td>
+                        <td><code>$lt</code></td>
+                        <td><code>.find({price: {$lt: 100}})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;=</code></td>
+                        <td><code>$lte</code></td>
+                        <td><code>.find({price: {$lte: 100}})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;</code></td>
+                        <td><code>$gt</code></td>
+                        <td><code>.find({quantity: {$gt: 1}})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;=</code></td>
+                        <td><code>$gte</code></td>
+                        <td><code>.find({quantity: {$gte: 5}})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;&gt;</code> / <code>!=</code></td>
+                        <td><code>$ne</code></td>
+                        <td><code>.find({id: {$ne: 3}})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>IN (...)</code></td>
+                        <td><code>$in</code></td>
+                        <td><code>.find({id: {$in: [1,2,3]}})</code></td>
+                    </tr>
+                    <tr>
+                        <td><code>NOT IN (...)</code></td>
+                        <td><code>$nin</code></td>
+                        <td><code>.find({id: {$nin: [1,2,3]}})</code></td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="box trap">
+                <div class="box-title">⚠️ Exam Trap — MongoDB vs MySQL Syntax</div>
+                <ul>
+                    <li>MongoDB uses <code>$keywords</code> (dollar sign prefix) for operators — <code>$lt</code>,
+                        <code>$gt</code>, <code>$ne</code>, <code>$in</code>
+                    </li>
+                    <li>MySQL uses plain symbols: <code>&lt;</code>, <code>&gt;</code>, <code>&lt;&gt;</code>,
+                        <code>IN</code>
+                    </li>
+                    <li>MongoDB uses <code>.find()</code>; MySQL uses <code>SELECT ... WHERE</code></li>
+                    <li>MongoDB uses <code>.pretty()</code> to format output readably — MySQL has no equivalent</li>
+                    <li>MongoDB collections have <strong>no fixed schema</strong> — each document can have different
+                        fields
+                    </li>
+                </ul>
+            </div>
+
+            <h3
+                style="font-size:17px;font-weight:600;color:var(--text);margin:30px 0 10px;display:flex;align-items:center;gap:10px;">
+                <span
+                    style="display:inline-block;width:4px;height:18px;border-radius:2px;flex-shrink:0;background:#2d6b8a;"></span>
+                Graph Databases
+            </h3>
+            <p>A graph database is based on the mathematical concept of a <strong>graph</strong> — a structure made of
+                nodes
+                and edges.</p>
+
+            <div class="box def">
+                <div class="box-title">📌 Key Terms</div>
+                <ul>
+                    <li><strong>Node</strong> (also called vertex): an entity — like a Person, Movie, or Product. Nodes
+                        hold
+                        data (attributes).</li>
+                    <li><strong>Edge</strong> (also called relationship): a directed connection between two nodes with a
+                        meaning. Edges also hold data (e.g. the date of a relationship, its strength).</li>
+                    <li>Crucially: <strong>both nodes AND edges hold data</strong> — this is different from relational
+                        databases where only rows (not their connections) hold data.</li>
+                </ul>
+            </div>
+
+            <div class="example">
+                <div class="example-title">💡 Example — Marvel Movie Graph</div>
+                <p>Nodes: Person (Anthony Russo), Movie (Captain America: Winter Soldier), Character (Cap)</p>
+                <p>Edges: "Directed" (Russo → Movie), "Acted In" (Person → Movie), "Plays" (Person → Character)</p>
+                <pre><span class="cm">-- Cypher query language (used by Neo4j)</span>
+
+<span class="cm">-- Get everything</span>
+MATCH (n) WHERE n:Person OR n:Movie OR n:Character RETURN n
+
+<span class="cm">-- Get a specific movie</span>
+MATCH (m:Movie {name: <span class="str">"captain america winter"</span>}) RETURN m
+
+<span class="cm">-- Find who directed via relationship traversal</span>
+MATCH m=(p:Person {name: <span class="str">"anthony russo"</span>})-[r:Directed]->() RETURN m</pre>
+                <p>Notice: graph queries can traverse relationships (<code>-[r:Directed]-></code>) — something that
+                    requires
+                    multiple JOINs in SQL.</p>
+            </div>
+
+            <h3
+                style="font-size:17px;font-weight:600;color:var(--text);margin:30px 0 10px;display:flex;align-items:center;gap:10px;">
+                <span
+                    style="display:inline-block;width:4px;height:18px;border-radius:2px;flex-shrink:0;background:#2d6b8a;"></span>
+                Graph Database Software
+            </h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Detail</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Popular software</td>
+                        <td>Neo4j (most common), Amazon Neptune, ArangoDB</td>
+                    </tr>
+                    <tr>
+                        <td>Query languages</td>
+                        <td>Cypher (Neo4j) or SparQL (semantic/RDF databases)</td>
+                    </tr>
+                    <tr>
+                        <td>Data formats</td>
+                        <td>RDF (Resource Description Framework), Turtle, or proprietary formats</td>
+                    </tr>
+                    <tr>
+                        <td>Loading data</td>
+                        <td>Load CSVs and map rows to nodes and edges — similar to MySQL's LOAD DATA</td>
+                    </tr>
+                    <tr>
+                        <td>Practical reality</td>
+                        <td>Historically hard to set up and slow — improving recently. Not practiced in this unit due to
+                            complexity.</td>
+                    </tr>
+                    <tr>
+                        <td>Blockchain</td>
+                        <td>Mentioned as another database paradigm — a distributed, immutable ledger (covered in L12)
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div><!-- /s10 -->
+
+        <hr>
+
+        <!-- ══════════════════════════════════════════════════════════
+     LECTURE 11
+═══════════════════════════════════════════════════════════ -->
+        <div class="s11">
+            <div class="lect-header" id="lect11">
+                <span class="lect-num ln5">LECTURE 11</span>
+                <h2>Security, Ethics &amp; Privacy</h2>
+            </div>
+
+            <h3>Why Data Is Sensitive</h3>
+            <p>In the course of business, organisations collect vast amounts of data from customers and clients. Some of
+                this data is required by law (e.g. Anti-Money Laundering / Counter-Terrorism Financing legislation
+                requires
+                identity verification). But data is a powerful asset — and once certain data is disclosed, it cannot be
+                undisclosed.</p>
+
+            <div class="box def">
+                <div class="box-title">📌 Key Properties of Data That Make It Risky</div>
+                <ul>
+                    <li><strong>Immutability of some data:</strong> You can change your password, but you can't change
+                        your
+                        date of birth, passport number, or health history. Once leaked, personally identifying
+                        information
+                        (PII) can cause permanent harm.</li>
+                    <li><strong>Business data ownership:</strong> Unlike personal data, business data (trade secrets,
+                        IP) is
+                        technically "owned" and can be changed — but leaking it to competitors is still devastating.
+                    </li>
+                    <li><strong>Not "owned" by anyone:</strong> Data about a person exists in a legal grey area — the
+                        person
+                        it describes doesn't technically own it in many jurisdictions.</li>
+                </ul>
+            </div>
+
+            <h3>Security Issues — Preventing Leaks</h3>
+            <p>An unprotected system can leak data — providing it to people who shouldn't have access. Four key
+                preventions:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Prevention</th>
+                        <th>What It Means</th>
+                        <th>Why It Matters</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Strong authentication</strong></td>
+                        <td>Use strong, unique usernames and passwords — or better, multi-factor authentication</td>
+                        <td>Weak passwords are the most common entry point for attackers</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Minimal permissions</strong></td>
+                        <td>Each user/group gets only the permissions they need — nothing more</td>
+                        <td>If an account is compromised, the attacker can only access what that account can — limiting
+                            damage</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Keep software updated</strong></td>
+                        <td>Apply patches and security updates promptly</td>
+                        <td>Most breaches exploit known vulnerabilities that have already been patched — unpatched
+                            systems
+                            are sitting targets</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Audit logs</strong></td>
+                        <td>Enable detailed logs of who accessed what and when</td>
+                        <td>"Prevention is better than cure, but being able to do a post-mortem is better than nothing"
+                            — if
+                            a breach occurs, logs tell you what happened</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Ethical Issues — Misusing Data You Legally Hold</h3>
+            <p>Even if data is legally collected, using it in ways the person didn't consent to is unethical. Examples:
+            </p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Issue</th>
+                        <th>Example</th>
+                        <th>Why It's Problematic</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Targeted advertising</strong></td>
+                        <td>Using purchase history to serve targeted ads without explicit consent</td>
+                        <td>A form of surveillance — the person may not realise their behaviour is being tracked and
+                            monetised</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Health outcome prediction</strong></td>
+                        <td>Insurance company using personal data to predict illness risk and adjust premiums</td>
+                        <td>Discriminates based on data the person may not have knowingly provided for that purpose</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Algorithmic bias</strong></td>
+                        <td>AI system predicts job performance using historical data that embeds existing biases (e.g.
+                            gender bias in hiring)</td>
+                        <td>Creates "digital stereotypes" — automated discrimination at scale</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Selling to third parties</strong></td>
+                        <td>Data collected for one purpose sold to another company without consent</td>
+                        <td>Breaks the implicit or explicit agreement about how data will be used</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Email list sign-ups</strong></td>
+                        <td>Auto-subscribing someone to a mailing list when they provide an email for a receipt</td>
+                        <td>Anti-spam laws exist but are inconsistently enforced globally</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Privacy Issues</h3>
+            <p>Privacy is about ensuring that personal data is only accessible to those who need it, only for the
+                purposes
+                agreed upon.</p>
+            <ul>
+                <li>Organisations should collect only the <strong>minimum data necessary</strong> — not everything they
+                    can
+                    get</li>
+                <li>Disclosure of private data can lead to <strong>fraud, embarrassment, or reputational damage</strong>
+                </li>
+                <li>Both <strong>technical controls</strong> (encryption, access control, audit logs) AND <strong>social
+                        controls</strong> (training, culture, policy) are needed</li>
+                <li>These principles apply <strong>B2C and B2B</strong> — business intellectual property and trade
+                    secrets
+                    are also targets of corporate espionage</li>
+            </ul>
+
+            <h3>Case Studies — Real-World Examples</h3>
+            <p>The lecture presents four case studies. For each, consider: What happened? Who was affected? What type of
+                issue is it? How could it be prevented? Can it be remediated?</p>
+
+            <div class="example">
+                <div class="example-title">💡 Case 1 — Myki Data Leak (Victoria, Australia)</div>
+                <p><strong>What happened:</strong> The Victorian Government released detailed Myki (public transport
+                    card)
+                    transaction data as part of a hackathon. Researchers cross-referenced this with publicly available
+                    tweets to identify politicians' card numbers and reconstruct their travel patterns.</p>
+                <p><strong>Issues:</strong> Privacy (data re-identification), Ethics (data used beyond original
+                    purpose),
+                    Security (insufficient anonymisation before release).</p>
+                <p><strong>Prevention:</strong> Proper anonymisation/aggregation before release; restrict granularity
+                    (zone-level, not stop-level); data governance review before publication.</p>
+                <div class="box trap">
+                    <div class="box-title">⚠️ Key Lesson</div>
+                    <p><strong>Anonymised data can be re-identified</strong> when combined with other publicly available
+                        datasets. Data that seems safe in isolation may not be safe when combined.</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-title">💡 Case 2 — Mailing List Without Consent</div>
+                <p><strong>What happened:</strong> Jim purchased a product online and provided his email to receive a
+                    receipt. The company added him to their marketing mailing list without asking for consent.</p>
+                <p><strong>Issues:</strong> Ethics (using data beyond consented purpose), Privacy (email used without
+                    permission for marketing), potentially Legal (anti-spam laws like Australia's Spam Act 2003).</p>
+                <p><strong>Prevention:</strong> Explicit opt-in checkboxes for marketing; keep receipt email separate
+                    from
+                    marketing consent.</p>
+            </div>
+
+            <div class="example">
+                <div class="example-title">💡 Case 3 — Optus "Hack" (Australia, 2022)</div>
+                <p><strong>What happened:</strong> Optus exposed personal details (including passport and driving
+                    licence
+                    numbers) of up to 9.8 million customers through an <strong>unauthenticated API endpoint</strong> —
+                    no
+                    login or credentials required to retrieve customer data.</p>
+                <p><strong>Issues:</strong> Security (no authentication on a sensitive endpoint), Privacy (highly
+                    sensitive
+                    PII exposed), Legal (regulatory/notification obligations).</p>
+                <p><strong>Prevention:</strong> Require authentication on all API endpoints; penetration test APIs;
+                    apply
+                    principle of minimal permissions; don't store more sensitive data than necessary.</p>
+                <div class="box trap">
+                    <div class="box-title">⚠️ Key Lesson</div>
+                    <p><strong>APIs must be secured.</strong> An unauthenticated endpoint exposing sensitive data is a
+                        critical vulnerability. This is exactly what "minimal permissions" and "keep software updated"
+                        protects against.</p>
+                </div>
+            </div>
+
+            <div class="example">
+                <div class="example-title">💡 Case 4 — AI Bias in Job Applications</div>
+                <p><strong>What happened:</strong> An AI system ranked job applications based on patterns from existing
+                    employees. Jane's application was rejected despite being well-qualified — the algorithm learned that
+                    gender was a predictor of success because the existing workforce was predominantly male.</p>
+                <p><strong>Issues:</strong> Ethics (algorithmic bias, discrimination), Privacy (personal attributes used
+                    for
+                    decisions without consent), Legal (potential discrimination law violations).</p>
+                <p><strong>Prevention:</strong> Audit training data for bias before use; test AI systems for
+                    discriminatory
+                    outcomes; require human review of AI decisions; don't use protected attributes as model features.
+                </p>
+                <div class="box trap">
+                    <div class="box-title">⚠️ Key Lesson</div>
+                    <p><strong>AI inherits the biases in its training data.</strong> "Garbage in, garbage out" — biased
+                        historical data produces biased automated decisions at scale.</p>
+                </div>
+            </div>
+
+            <div class="box trap">
+                <div class="box-title">⚠️ The Three Categories — Know These Distinctly</div>
+                <ul>
+                    <li><strong>Security:</strong> Protecting data from <em>unauthorised access</em> — technical
+                        controls,
+                        authentication, patching, audit logs</li>
+                    <li><strong>Ethics:</strong> Using data <em>appropriately</em> — consent, purpose limitation,
+                        avoiding
+                        discrimination and surveillance</li>
+                    <li><strong>Privacy:</strong> Ensuring data is <em>only visible to those who need it</em> — minimum
+                        data
+                        collection, access controls, preventing re-identification</li>
+                </ul>
+                <p>These three often overlap in real cases — the Optus breach is primarily Security but also Privacy and
+                    has
+                    Legal implications. A case can involve all three simultaneously.</p>
+            </div>
+
+        </div><!-- /s11 -->
+
+        <hr>
+
+        <!-- ══════════════════════════════════════════════════════════
+     LECTURE 12
+═══════════════════════════════════════════════════════════ -->
+        <div class="s12">
+            <div class="lect-header" id="lect12">
+                <span class="lect-num ln2">LECTURE 12</span>
+                <h2>The Future of Databases &amp; Revision</h2>
+            </div>
+
+            <h3>Blockchain — A New Kind of Database</h3>
+            <p>Blockchain is described as <strong>a distributed, immutable ledger of transactions</strong>. Each word in
+                that definition matters:</p>
+
+            <div class="box def">
+                <div class="box-title">📌 Three Key Properties of Blockchain</div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Property</th>
+                            <th>What It Means</th>
+                            <th>Why It Matters</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Distributed</strong></td>
+                            <td>The "source of truth" is stored simultaneously across many machines (nodes) — there is
+                                no
+                                single central server</td>
+                            <td>No single point of failure; no single party controls or can alter the record
+                                unilaterally
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Immutable</strong></td>
+                            <td>Past transactions/records cannot be changed or deleted once written</td>
+                            <td>Creates a tamper-proof audit trail — ideal for financial transactions, contracts, and
+                                provenance tracking</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Ledger of Transactions</strong></td>
+                            <td>Stores a list of standardised operations (e.g. "Alice paid Bob $100") rather than
+                                arbitrary
+                                data</td>
+                            <td>Each entry is a discrete, verifiable event — not just a data record</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="analogy">
+                <div class="analogy-title">🧠 Analogy — A shared document that can never be edited</div>
+                <p>Imagine a document shared with thousands of people simultaneously. Everyone can see the same content,
+                    and
+                    it records a history of every change. Now imagine that nobody — not even the platform — can edit or
+                    delete previous entries. That's blockchain. Multiple parties hold the truth simultaneously, and
+                    history
+                    is permanent.</p>
+            </div>
+
+            <h3>Blockchain Use Cases</h3>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Use Case</th>
+                        <th>Why Blockchain Fits</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Cryptocurrency</strong> (Bitcoin, Ethereum)</td>
+                        <td>Decentralised currency — no central bank needed; immutable transaction history prevents
+                            double-spending</td>
+                    </tr>
+                    <tr>
+                        <td><strong>NFTs</strong> (Non-Fungible Tokens)</td>
+                        <td>Prove ownership and provenance of digital assets without a central authority</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Smart Contracts</strong></td>
+                        <td>Self-executing contracts stored on the blockchain — automatically trigger when conditions
+                            are
+                            met, no intermediary needed</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Supply chain tracking</strong></td>
+                        <td>Immutably record every step a product takes — from factory to consumer; prevents fraud</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="box tip">
+                <div class="box-title">💡 Key Exam Point — When to Use Blockchain</div>
+                <p>Good blockchain use cases are those where the <strong>distributed + immutable properties solve a
+                        problem
+                        that other systems cannot</strong>. If a traditional centralised database would work just as
+                    well,
+                    blockchain adds unnecessary complexity. Always ask: "Do we actually need this to be distributed and
+                    tamper-proof?"</p>
+            </div>
+
+            <h3>Databases and Business Decision Making</h3>
+            <p>The lecture revisits the core relationship between databases and BI:</p>
+            <ul>
+                <li>Databases + BI tools together allow organisations to <strong>analyse data at scale</strong></li>
+                <li>This enables: running more efficiently, making better decisions, reacting quickly (agility), and
+                    scaling
+                    faster</li>
+                <li><strong>Data must be accessible, consistent, and fast</strong> — otherwise analysis takes too long
+                    and
+                    insights are out of date by the time they're ready. Hence, the DBMS used must be performant.</li>
+                <li>Volumes of data continue to grow exponentially — driven by IoT, social media, e-commerce, and
+                    sensors.
+                    The question of "where do we go next?" points to Web 3.0 and beyond.</li>
+            </ul>
+
+            <h3>Lecture 12 as Revision — Key Topics Cross-Reference</h3>
+            <p>Lecture 12 is a revision lecture that revisits every major topic of the unit. Use this table to navigate
+                back
+                to the right section for deeper study:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Topic Revisited</th>
+                        <th>Original Lecture</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>BI definition; analytics hierarchy
+                            (Descriptive/Diagnostic/Predictive/Prescriptive/Comparative)
+                        </td>
+                        <td>L1</td>
+                    </tr>
+                    <tr>
+                        <td>Interrogating data: drill up/down/through, filter vs highlight</td>
+                        <td>L1</td>
+                    </tr>
+                    <tr>
+                        <td>Databases vs spreadsheets — 3 advantages</td>
+                        <td>L2</td>
+                    </tr>
+                    <tr>
+                        <td>Relational vs NoSQL data models; 8 database types</td>
+                        <td>L2, L10</td>
+                    </tr>
+                    <tr>
+                        <td>Primary keys, foreign keys, relationship cardinalities (1:1, 1:M, M:M)</td>
+                        <td>L2</td>
+                    </tr>
+                    <tr>
+                        <td>DBMS and SQL: CREATE, ALTER, DROP TABLE</td>
+                        <td>L3</td>
+                    </tr>
+                    <tr>
+                        <td>MySQL data types: VARCHAR, CHAR, BOOLEAN, INT, FLOAT</td>
+                        <td>L3</td>
+                    </tr>
+                    <tr>
+                        <td>Field modifiers: PRIMARY KEY, AUTO_INCREMENT, NOT NULL, FOREIGN KEY</td>
+                        <td>L3</td>
+                    </tr>
+                    <tr>
+                        <td>CRUD: INSERT, SELECT, UPDATE, DELETE</td>
+                        <td>L3</td>
+                    </tr>
+                    <tr>
+                        <td>Generated columns, DEFAULT, CHECK constraints, Indexes</td>
+                        <td>L4</td>
+                    </tr>
+                    <tr>
+                        <td>Complex WHERE operators + AND/OR/NOT</td>
+                        <td>L4</td>
+                    </tr>
+                    <tr>
+                        <td>ORDER BY, GROUP BY, aggregate functions, date functions, ROLLUP</td>
+                        <td>L5</td>
+                    </tr>
+                    <tr>
+                        <td>JOINs (INNER, LEFT, RIGHT) — syntax and behaviour</td>
+                        <td>L6</td>
+                    </tr>
+                    <tr>
+                        <td>Views; Spatial data (POINT, ST_GeomFromText, ST_Distance_Sphere)</td>
+                        <td>L6</td>
+                    </tr>
+                    <tr>
+                        <td>Reports, Dashboards, Apps; Power BI interface; DAX</td>
+                        <td>L7</td>
+                    </tr>
+                    <tr>
+                        <td>R/Python script visuals; corrplot; imported vs connected data</td>
+                        <td>L8</td>
+                    </tr>
+                    <tr>
+                        <td>BI workflow; ETL; MECE; visualisation types; bad charts</td>
+                        <td>L9</td>
+                    </tr>
+                    <tr>
+                        <td>MongoDB; graph databases (nodes, edges, Cypher)</td>
+                        <td>L10</td>
+                    </tr>
+                    <tr>
+                        <td>Security, Ethics, Privacy; 4 case studies</td>
+                        <td>L11</td>
+                    </tr>
+                    <tr>
+                        <td>Blockchain: distributed, immutable, ledger</td>
+                        <td>L12</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div><!-- /s12 -->
+
+        <hr>
+
         <!-- ══════════════════════════════════════════════════════════
      CHECKLIST
 ═══════════════════════════════════════════════════════════ -->
         <div id="checklist">
             <div class="lect-header">
                 <span class="lect-num" style="background:#333;">CHECKLIST</span>
-                <h2>Master Revision Checklist</h2>
+                <h2>Master Revision Checklist — All 12 Lectures</h2>
             </div>
 
             <div class="summary-grid">
@@ -4581,7 +5369,6 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                         <li>All 4 cardinalities + examples</li>
                         <li>M:M needs a linking table</li>
                         <li>5 database design steps</li>
-                        <li>Read an ER diagram</li>
                     </ul>
                 </div>
                 <div class="sc sc-l3">
@@ -4612,7 +5399,6 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                     <ul>
                         <li>USE — once per session</li>
                         <li>3 comment styles</li>
-                        <li>SHOW CREATE TABLE vs SHOW COLUMNS</li>
                         <li>Clause order: S→F→W→G→O</li>
                         <li>SELECT rule in GROUP BY</li>
                         <li>5 aggregate functions + NULLs</li>
@@ -4623,24 +5409,21 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                 <div class="sc sc-l6">
                     <div class="sc-label">L6 · Advanced DB</div>
                     <ul>
-                        <li>INNER / LEFT / RIGHT JOIN — meaning &amp; result</li>
-                        <li>JOIN syntax: ON clause + table prefixes</li>
-                        <li>NULLs in non-matching JOIN rows</li>
+                        <li>INNER / LEFT / RIGHT JOIN</li>
+                        <li>JOIN ON syntax + table prefixes</li>
                         <li>Views — CREATE, REPLACE, DROP</li>
-                        <li>Spatial: POINT, ST_GeomFromText, ST_AsText</li>
+                        <li>Spatial: ST_GeomFromText, ST_AsText</li>
                         <li>ST_Distance_Sphere (metres)</li>
                         <li>LOAD DATA INFILE rules</li>
                     </ul>
                 </div>
                 <div class="sc sc-l7">
-                    <div class="sc-label">L7 · BI Tools &amp; Power BI</div>
+                    <div class="sc-label">L7 · Power BI Basics</div>
                     <ul>
-                        <li>BI tool evolution (Excel → Pivot → Suites)</li>
-                        <li>6-step BI workflow</li>
+                        <li>BI tool evolution</li>
                         <li>Report vs Dashboard vs App</li>
                         <li>Power BI Desktop vs Online</li>
                         <li>8 interface areas by name</li>
-                        <li>Data transformation types</li>
                         <li>DAX: Measure vs Table + syntax</li>
                         <li>Field icons: Σ, calendar, ABC</li>
                         <li>Cross-filtering behaviour</li>
@@ -4649,167 +5432,113 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                 <div class="sc sc-l8">
                     <div class="sc-label">L8 · Programming &amp; BI</div>
                     <ul>
-                        <li>R vs Python — libraries (matplotlib, seaborn, corrplot)</li>
-                        <li>Script visuals: static, not interactive</li>
-                        <li>2 ways to use code in Power BI</li>
-                        <li>Dummy variables: concept &amp; X−1 rule</li>
-                        <li>Correlation limit with binary variables</li>
-                        <li>corrplot key options (method, type, order)</li>
-                        <li>Imported vs Connected data — differences &amp; risks</li>
-                        <li>Spatial types: Point, Polygon, Line</li>
-                        <li>Choropleth vs Bubble map trade-offs</li>
-                        <li>Map design pitfalls (colour, area bias, accessibility)</li>
+                        <li>R/Python: matplotlib, seaborn, corrplot</li>
+                        <li>Script visuals are static</li>
+                        <li>Dummy variables: X−1 rule</li>
+                        <li>corrplot key options</li>
+                        <li>Imported vs Connected data</li>
+                        <li>Choropleth vs Bubble map</li>
                     </ul>
                 </div>
                 <div class="sc sc-l9">
-                    <div class="sc-label">L9 · Workflows &amp; Visualisation</div>
+                    <div class="sc-label">L9 · Workflows &amp; Vis</div>
                     <ul>
-                        <li>5-stage BI workflow (name &amp; order)</li>
-                        <li>Most time in first 3 stages</li>
-                        <li>Problem statement — what &amp; who</li>
-                        <li>10 data acquisition questions</li>
-                        <li>6 data preparation problems</li>
-                        <li>ETL — Extract, Transform, Load</li>
-                        <li>11 analysis activity types</li>
-                        <li>MECE — mutually exclusive, collectively exhaustive</li>
-                        <li>8 visualisation categories + best chart</li>
-                        <li>2 major presentation mistakes</li>
-                        <li>Bad chart examples — what's wrong</li>
-                        <li>FAANG + NASDAQ symbols</li>
+                        <li>5-stage BI workflow (order)</li>
+                        <li>Problem statement components</li>
+                        <li>9 data acquisition questions</li>
+                        <li>ETL: Extract, Transform, Load</li>
+                        <li>10 analysis activity types</li>
+                        <li>MECE: ME + CE</li>
+                        <li>8 visualisation types + charts</li>
+                        <li>Bad chart rules</li>
+                    </ul>
+                </div>
+                <div class="sc sc-l1">
+                    <div class="sc-label" style="color:#2d6b8a;">L10 · Non-Relational DBs</div>
+                    <ul>
+                        <li>NoSQL: no fixed schema</li>
+                        <li>Document DB = NoSQL (not vice-versa)</li>
+                        <li>Graph DB: nodes + edges both hold data</li>
+                        <li>MongoDB CRUD commands</li>
+                        <li>MongoDB $operators vs SQL operators</li>
+                        <li>.find(), .pretty(), insertOne/Many</li>
+                        <li>Cypher language (Neo4j)</li>
+                    </ul>
+                </div>
+                <div class="sc sc-l5">
+                    <div class="sc-label" style="color:#6b2d2d;">L11 · Security, Ethics &amp; Privacy</div>
+                    <ul>
+                        <li>Security: auth, min. permissions, patches, logs</li>
+                        <li>Ethics: consent, purpose, bias, surveillance</li>
+                        <li>Privacy: min. data, access control, re-ID risk</li>
+                        <li>Myki: anonymised data can be re-identified</li>
+                        <li>Optus: unauthenticated API = breach</li>
+                        <li>AI bias: training data → discriminatory outcomes</li>
+                        <li>3 categories can overlap in one case</li>
+                    </ul>
+                </div>
+                <div class="sc sc-l2">
+                    <div class="sc-label" style="color:#2d5a2d;">L12 · Future &amp; Revision</div>
+                    <ul>
+                        <li>Blockchain: distributed, immutable, ledger</li>
+                        <li>Use cases: crypto, NFTs, smart contracts</li>
+                        <li>When to use blockchain vs traditional DB</li>
+                        <li>DB + BI enables agility, scale, faster decisions</li>
+                        <li>Cross-reference table for all 12 lectures</li>
                     </ul>
                 </div>
             </div>
 
-            <h3 style="margin-top:28px;">Full Checklist</h3>
+            <h3>L10–L12 Checklist Items</h3>
             <ul class="checklist">
-                <li><span class="cb"></span>I can name &amp; explain all 5 analytics levels and give a real example of
-                    each.</li>
-                <li><span class="cb"></span>I can explain the difference between a Report and a Dashboard (structure and
-                    purpose).</li>
-                <li><span class="cb"></span>I can explain Filter vs Highlight, and Drill Down vs Drill Through.</li>
-                <li><span class="cb"></span>I know 3 ways a database beats a spreadsheet — and 1 way a spreadsheet wins.
+                <li><span class="cb"></span>I know the main difference between NoSQL and relational databases — NoSQL
+                    has no
+                    fixed schema.</li>
+                <li><span class="cb"></span>I know that document databases are NoSQL, but not all NoSQL databases are
+                    document-based.</li>
+                <li><span class="cb"></span>I know when to use a graph database — when relationships between entities
+                    are
+                    the most important data element.</li>
+                <li><span class="cb"></span>I know MongoDB terminology: Collection (= table), Document (= row), Field (=
+                    column).</li>
+                <li><span class="cb"></span>I can write MongoDB commands to create a collection, insert one and multiple
+                    documents using insertOne/insertMany.</li>
+                <li><span class="cb"></span>I know all 7 MongoDB query operators ($lt, $lte, $gt, $gte, $ne, $in, $nin)
+                    and
+                    their MySQL equivalents.</li>
+                <li><span class="cb"></span>I know the format of a MongoDB .find() query and what .pretty() does.</li>
+                <li><span class="cb"></span>I know that in graph databases, both nodes AND edges hold data.</li>
+                <li><span class="cb"></span>I know Cypher is used with Neo4j and can read a basic MATCH query.</li>
+                <li><span class="cb"></span>I can distinguish Security, Ethics, and Privacy as separate (though
+                    overlapping)
+                    categories of data issues.</li>
+                <li><span class="cb"></span>I know the 4 security preventions: strong authentication, minimal
+                    permissions,
+                    software updates, audit logs.</li>
+                <li><span class="cb"></span>I can describe all 5 ethical issue types: targeted advertising, health
+                    prediction, algorithmic bias, third-party selling, mailing list sign-ups.</li>
+                <li><span class="cb"></span>I know both technical and social controls are needed for privacy — not just
+                    one
+                    or the other.</li>
+                <li><span class="cb"></span>I can analyse all 4 case studies: Myki, Mailing List, Optus, AI Hiring Bias.
                 </li>
-                <li><span class="cb"></span>I can name and describe at least 6 different database types.</li>
-                <li><span class="cb"></span>I can explain PK and FK with a real example (Customer → Invoice).</li>
-                <li><span class="cb"></span>I know all 4 cardinalities and can give an example of each. I know M:M needs
-                    a linking table.</li>
-                <li><span class="cb"></span>I can list the 5 database design steps in order.</li>
-                <li><span class="cb"></span>I can read and draw a basic ER diagram in Chen notation.</li>
-                <li><span class="cb"></span>I know CRUD — the 4 operations and the SQL command for each.</li>
-                <li><span class="cb"></span>I know ACID — all 4 principles in plain English with the ATM analogy.</li>
-                <li><span class="cb"></span>I know all major MySQL data types and can choose the right one for a
-                    scenario.</li>
-                <li><span class="cb"></span>I understand VARCHAR vs CHAR and when to use each.</li>
-                <li><span class="cb"></span>I can write a complete CREATE TABLE statement with types, modifiers, and a
-                    PK.</li>
-                <li><span class="cb"></span>I can use all ALTER TABLE variants (ADD, DROP, MODIFY, RENAME, CHANGE).</li>
-                <li><span class="cb"></span>I know the danger of DELETE without WHERE and DROP TABLE.</li>
-                <li><span class="cb"></span>I can explain and write a generated column (GENERATED ALWAYS AS) and know
-                    VIRTUAL vs STORED.</li>
-                <li><span class="cb"></span>I can add DEFAULT and CHECK constraints and know the difference.</li>
-                <li><span class="cb"></span>I know the FK creation rule (parent must exist first).</li>
-                <li><span class="cb"></span>I can choose between CASCADE, SET NULL, and RESTRICT and justify my choice.
+                <li><span class="cb"></span>I can answer the 5 case study questions: What happened? Who affected? Why a
+                    problem? How to prevent? Can it be remediated?</li>
+                <li><span class="cb"></span>I know the Myki lesson: anonymised data can be re-identified when combined
+                    with
+                    other datasets.</li>
+                <li><span class="cb"></span>I know the Optus lesson: all API endpoints must require authentication.</li>
+                <li><span class="cb"></span>I know the AI bias lesson: AI inherits the biases present in its training
+                    data.
                 </li>
-                <li><span class="cb"></span>I know all 7 WHERE operators and can write examples of each.</li>
-                <li><span class="cb"></span>I can combine WHERE conditions with AND, OR, NOT and use brackets.</li>
-                <li><span class="cb"></span>I can explain what an index does, its trade-offs, and write CREATE/DROP
-                    INDEX.</li>
-                <li><span class="cb"></span>I know the USE command rules — once per session, no way to cancel, best
-                    practice placement.</li>
-                <li><span class="cb"></span>I know all 3 SQL comment styles and can use them appropriately.</li>
-                <li><span class="cb"></span>I know what SHOW CREATE TABLE reveals vs SHOW COLUMNS (constraints, FKs,
-                    generated cols).</li>
-                <li><span class="cb"></span>I know the mandatory clause order: SELECT → FROM → WHERE → GROUP BY → ORDER
-                    BY.</li>
-                <li><span class="cb"></span>I can explain the SELECT rule in GROUP BY — why only grouped columns and
-                    aggregates.</li>
-                <li><span class="cb"></span>I know all 5 aggregate functions, what data types they work on, and how
-                    NULLs affect them.</li>
-                <li><span class="cb"></span>I understand COUNT(col) vs COUNT(*) and when each is needed.</li>
-                <li><span class="cb"></span>I can use MONTH() and YEAR() in both SELECT and GROUP BY parts of a query.
-                </li>
-                <li><span class="cb"></span>I can use AS to rename output columns and WITH ROLLUP to add a grand total
-                    row.</li>
-                <li><span class="cb"></span>I know all 3 JOIN types, what rows each keeps, and when to use each one.
-                </li>
-                <li><span class="cb"></span>I can write a JOIN query with correct ON syntax and table-prefixed column
-                    names.</li>
-                <li><span class="cb"></span>I know that non-matching rows in LEFT/RIGHT JOINs show NULL in the unmatched
-                    columns.</li>
-                <li><span class="cb"></span>I can create, replace, drop, and query a View. I understand a View does not
-                    store new data.</li>
-                <li><span class="cb"></span>I know the spatial POINT format: ST_GeomFromText('POINT(longitude
-                    latitude)') — longitude first.</li>
-                <li><span class="cb"></span>I know to use ST_AsText() when SELECTing geometry columns, and
-                    ST_Distance_Sphere returns metres.</li>
-                <li><span class="cb"></span>I know the LOAD DATA INFILE rules: table must exist first, full path
-                    required, IGNORE X LINES.</li>
-                <li><span class="cb"></span>I can describe the evolution of BI tools: Excel → Pivot Tables → Modern BI
-                    Suites.</li>
-                <li><span class="cb"></span>I know the 6-step BI workflow: Connect → Model → Transform → Visualise →
-                    Assemble → Share.</li>
-                <li><span class="cb"></span>I can explain Report vs Dashboard vs App and the difference between them.
-                </li>
-                <li><span class="cb"></span>I know Power BI Desktop is Windows-only and what macOS users must do
-                    instead.</li>
-                <li><span class="cb"></span>I can identify and describe all 8 areas of the Power BI Desktop interface.
-                </li>
-                <li><span class="cb"></span>I know the 6 types of data transformations and can give an example of each.
-                </li>
-                <li><span class="cb"></span>I know the 3 field icon types (Σ, calendar, ABC) and what each means for how
-                    a field can be used.</li>
-                <li><span class="cb"></span>I understand DAX: the difference between a Measure and a Table, and the
-                    basic syntax.</li>
-                <li><span class="cb"></span>I can explain cross-filtering — clicking one visual automatically filters
-                    all others on the same page.</li>
-                <li><span class="cb"></span>I can explain why you would use R or Python in Power BI instead of built-in
-                    tools.</li>
-                <li><span class="cb"></span>I know the two ways to use R/Python in Power BI: Power Query Editor and
-                    Script Visual.</li>
-                <li><span class="cb"></span>I know that R/Python script visuals are static — not interactive — and why
-                    this matters.</li>
-                <li><span class="cb"></span>I know the key libraries: matplotlib, seaborn, and corrplot — what each is
-                    for.</li>
-                <li><span class="cb"></span>I can explain what a dummy variable is and why you only need X−1 columns.
-                </li>
-                <li><span class="cb"></span>I know why correlation with binary variables is statistically limited and
-                    what to use instead.</li>
-                <li><span class="cb"></span>I know at least 4 corrplot options and what each changes in the plot's
-                    appearance.</li>
-                <li><span class="cb"></span>I can explain the difference between Imported and Connected data — how each
-                    works and when to use each.</li>
-                <li><span class="cb"></span>I know the risks of connected data: dependency, transformation overhead, big
-                    data limits.</li>
-                <li><span class="cb"></span>I can name the three spatial data types (Point, Polygon, Line) and give a
-                    real example of each.</li>
-                <li><span class="cb"></span>I can explain the difference between a Bubble map and a Choropleth map, and
-                    their design pitfalls.</li>
-                <li><span class="cb"></span>I can name all 5 stages of the BI data workflow in order, and explain what
-                    each stage involves.</li>
-                <li><span class="cb"></span>I know that the majority of time in a BI project is spent in the first three
-                    stages (not analysis or reporting).</li>
-                <li><span class="cb"></span>I can write a well-formed problem statement and explain what it must contain
-                    (what + who).</li>
-                <li><span class="cb"></span>I can list at least 5 theoretical questions to ask when evaluating a data
-                    source for acquisition.</li>
-                <li><span class="cb"></span>I can name all 6 types of data preparation problems and give an example of
-                    each.</li>
-                <li><span class="cb"></span>I know what ETL stands for (Extract, Transform, Load) and how it relates to
-                    data preparation.</li>
-                <li><span class="cb"></span>I can name and describe all 11 analysis activity types with a real example
-                    of each.</li>
-                <li><span class="cb"></span>I can explain the MECE principle — what "Mutually Exclusive" and
-                    "Collectively Exhaustive" mean — with an example.</li>
-                <li><span class="cb"></span>I know why MECE matters for slicers in Power BI (data must be mutually
-                    exclusive for correct filtering).</li>
-                <li><span class="cb"></span>I can name all 8 visualisation categories and identify the best chart type
-                    for each.</li>
-                <li><span class="cb"></span>I can identify the two major presentation mistakes (confusing fact for
-                    opinion; misrepresenting data) and give examples.</li>
-                <li><span class="cb"></span>I can explain what was wrong with the FOX News pie chart and the NBC2 bar
-                    chart from the lecture.</li>
-                <li><span class="cb"></span>I know the FAANG companies, their parent companies, and their NASDAQ ticker
-                    symbols.</li>
+                <li><span class="cb"></span>I can define Blockchain as a distributed, immutable ledger of transactions
+                    and
+                    explain each property.</li>
+                <li><span class="cb"></span>I know the main blockchain use cases: cryptocurrency, NFTs, smart contracts,
+                    supply chain tracking.</li>
+                <li><span class="cb"></span>I know when blockchain is appropriate vs when a traditional database would
+                    be
+                    sufficient.</li>
             </ul>
         </div>
 
@@ -4821,8 +5550,11 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
         <div id="examqs">
             <div class="lect-header">
                 <span class="lect-num" style="background:#333;">EXAM Qs</span>
-                <h2>30 Possible Exam Questions</h2>
+                <h2>40 Possible Exam Questions</h2>
             </div>
+            <p style="color:var(--muted); font-size:13px; margin-bottom:20px;">Questions 1–30 covered all previous
+                lectures.
+                Questions 31–40 are new for L10–L12.</p>
 
             <div class="eq"><span class="eq-n">1</span>
                 <div>
@@ -4835,14 +5567,16 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                 <div>
                     <div class="eq-type">Definition · L1</div>
                     <div class="eq-q">What is the difference between a Report and a Dashboard? What structural rule must
-                        a Dashboard follow? What is an "App" in the context of Power BI?</div>
+                        a
+                        Dashboard follow? What is an "App" in the context of Power BI?</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">3</span>
                 <div>
                     <div class="eq-type">Comparison · L2</div>
                     <div class="eq-q">List three ways a relational database is superior to a spreadsheet. Name one
-                        scenario where a spreadsheet might be the better choice.</div>
+                        scenario
+                        where a spreadsheet might be the better choice.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">4</span>
@@ -4857,7 +5591,8 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                     <div class="eq-type">Scenario · L2</div>
                     <div class="eq-q">A university has Students and Courses. Each student can enrol in many courses, and
                         each course can have many students. What is this relationship type called, and how is it
-                        implemented in a relational database?</div>
+                        implemented
+                        in a relational database?</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">6</span>
@@ -4865,22 +5600,26 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                     <div class="eq-type">SQL Writing · L3</div>
                     <div class="eq-q">Write a CREATE TABLE statement for an Employee table with: auto-incrementing ID,
                         required full name (up to 100 chars), nullable date of birth, required decimal salary, and a
-                        boolean "isActive" column that defaults to true.</div>
+                        boolean
+                        "isActive" column that defaults to true.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">7</span>
                 <div>
                     <div class="eq-type">Short Answer · L3</div>
                     <div class="eq-q">What are the four ACID properties? Briefly explain each one using an ATM
-                        transaction as your example.</div>
+                        transaction
+                        as your example.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">8</span>
                 <div>
                     <div class="eq-type">SQL Writing · L4</div>
                     <div class="eq-q">Write the SQL to add a Foreign Key on an existing Orders table, linking its
-                        customerID column to the id column of the Customer table. Include an appropriate referential
-                        action and explain why you chose it.</div>
+                        customerID
+                        column to the id column of the Customer table. Include an appropriate referential action and
+                        explain
+                        why you chose it.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">9</span>
@@ -4888,22 +5627,26 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                     <div class="eq-type">Scenario · L4</div>
                     <div class="eq-q">You define ON DELETE CASCADE on a FK from Orders to Customer. A customer is then
                         deleted. What happens to their orders? Describe a scenario where RESTRICT would be more
-                        appropriate.</div>
+                        appropriate.
+                    </div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">10</span>
                 <div>
                     <div class="eq-type">SQL Writing · L4/L5</div>
                     <div class="eq-q">Using the Transaction table (id, date, customerName, transactionItem), write a
-                        query to return names and dates of transactions where transactionItem > 2 AND date is within
-                        2023. Sort results by date ascending.</div>
+                        query
+                        to return names and dates of transactions where transactionItem > 2 AND date is within 2023.
+                        Sort
+                        results by date ascending.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">11</span>
                 <div>
                     <div class="eq-type">SQL Writing · L5</div>
                     <div class="eq-q">Using TransactionItem (id, description, unitPrice, hasGst), write a query finding
-                        the total sum and average unitPrice grouped by hasGst, with column aliases "totalRevenue" and
+                        the
+                        total sum and average unitPrice grouped by hasGst, with column aliases "totalRevenue" and
                         "avgPrice". Sort so hasGst=1 appears first.</div>
                 </div>
             </div>
@@ -4912,7 +5655,9 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                     <div class="eq-type">SQL Debugging · L5</div>
                     <div class="eq-q">This query causes an error:
                         <code>SELECT department, employeeName, COUNT(id) FROM Sales GROUP BY department;</code>.
-                        Identify the problem and write the corrected query.</div>
+                        Identify
+                        the problem and write the corrected query.
+                    </div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">13</span>
@@ -4928,15 +5673,17 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                     <div class="eq-type">SQL Writing · L6</div>
                     <div class="eq-q">Write a query that joins a Customer table (id, fullName) and an Invoice table (id,
                         customerID, amount) to return each invoice with its customer's name. Use an appropriate JOIN
-                        type and explain your choice.</div>
+                        type
+                        and explain your choice.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">15</span>
                 <div>
                     <div class="eq-type">Conceptual · L6</div>
                     <div class="eq-q">What is a database View? How is creating a View similar to a generated column?
-                        Write the SQL to create a view called "ActiveCustomers" that returns all customers where
-                        isActive = 1.</div>
+                        Write
+                        the SQL to create a view called "ActiveCustomers" that returns all customers where isActive = 1.
+                    </div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">16</span>
@@ -4951,602 +5698,225 @@ Calendar = CALENDAR(DATE(2013,01,01), DATE(2014,12,31))</pre>
                 <div>
                     <div class="eq-type">Short Answer · L7</div>
                     <div class="eq-q">Describe the evolution of BI tools from the earliest approach to modern suites.
-                        What limitations of earlier tools drove the move to modern BI software?</div>
+                        What
+                        limitations of earlier tools drove the move to modern BI software?</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">18</span>
                 <div>
                     <div class="eq-type">Conceptual · L7</div>
                     <div class="eq-q">In Power BI, what is the difference between a Measure and a Table created using
-                        DAX? Write a DAX example of each. How does a Measure change when a user applies a filter to the
-                        report?</div>
+                        DAX?
+                        Write a DAX example of each. How does a Measure change when a user applies a filter to the
+                        report?
+                    </div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">19</span>
                 <div>
                     <div class="eq-type">Scenario · L7</div>
                     <div class="eq-q">A colleague loads a CSV of sales data into Power BI. The "Revenue" column shows as
-                        a text field (ABC icon) instead of numeric (Σ). What is the problem, how does this affect their
+                        a
+                        text field (ABC icon) instead of numeric (Σ). What is the problem, how does this affect their
                         report, and how do they fix it?</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">20</span>
                 <div>
-                    <div class="eq-type">Short Answer · L7</div>
-                    <div class="eq-q">Explain cross-filtering in Power BI. A report page has three visuals: a line
-                        chart, a map, and a bar chart. A user clicks "Germany" on the map. What happens to the line
-                        chart and bar chart?</div>
+                    <div class="eq-type">Comparison · L8</div>
+                    <div class="eq-q">What are two advantages and two disadvantages of using R or Python script visuals
+                        in
+                        Power BI compared to built-in visuals? Name one visualisation library available in each
+                        language.
+                    </div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">21</span>
                 <div>
-                    <div class="eq-type">Comparison · L8</div>
-                    <div class="eq-q">What are two advantages and two disadvantages of using R or Python script visuals
-                        in Power BI compared to built-in visuals? Name one visualisation library available in each
-                        language.</div>
+                    <div class="eq-type">Conceptual · L8</div>
+                    <div class="eq-q">What is a dummy variable? A dataset has a "Colour" column with values Red, Green,
+                        and
+                        Blue. How many dummy variable columns would you create, and why not one per value? Show the
+                        transformation with an example table.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">22</span>
                 <div>
-                    <div class="eq-type">Conceptual · L8</div>
-                    <div class="eq-q">What is a dummy variable? A dataset has a "Colour" column with values Red, Green,
-                        and Blue. How many dummy variable columns would you create, and why not one per value? Show the
-                        transformation with an example table.</div>
+                    <div class="eq-type">Scenario · L8</div>
+                    <div class="eq-q">Your manager wants a Power BI dashboard showing today's live sales data from
+                        MySQL.
+                        Should you use Imported or Connected data? Explain your choice and describe two risks of the
+                        approach you chose.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">23</span>
                 <div>
-                    <div class="eq-type">Scenario · L8</div>
-                    <div class="eq-q">Your manager wants a Power BI dashboard that always shows today's live sales data
-                        from the MySQL database. Should you use Imported or Connected data? Explain your choice and
-                        describe two risks of your chosen approach.</div>
+                    <div class="eq-type">Short Answer · L9</div>
+                    <div class="eq-q">List the 5 stages of the BI data workflow in order. Which stages consume the most
+                        time
+                        in a real project, and why is this the case?</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">24</span>
                 <div>
-                    <div class="eq-type">Comparison · L8</div>
-                    <div class="eq-q">Compare a Bubble map and a Choropleth (filled) map. What does each use to
-                        represent data values? Give one scenario where a choropleth is better, and explain one design
-                        pitfall specific to choropleth maps.</div>
+                    <div class="eq-type">Conceptual · L9</div>
+                    <div class="eq-q">Explain what ETL stands for and describe each of its three steps. Why is ETL NOT
+                        the
+                        same thing as a data warehouse? What relationship do they have?</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">25</span>
                 <div>
-                    <div class="eq-type">Short Answer · L8</div>
-                    <div class="eq-q">Name the three spatial data types and give a real-world example of each. Which
-                        type is generally most useful for spatial analysis and why?</div>
+                    <div class="eq-type">Definition · L9</div>
+                    <div class="eq-q">Define the MECE principle. Using a business with 5 product categories as your
+                        example,
+                        explain what it means for data to be Mutually Exclusive and Collectively Exhaustive. Why does
+                        MECE
+                        matter for Power BI slicers?</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">26</span>
                 <div>
-                    <div class="eq-type">Process · L9</div>
-                    <div class="eq-q">Name the five stages of the BI data workflow in correct order. For each stage,
-                        write one sentence explaining what happens in it. Which stages consume the most time in
-                        practice, and why?</div>
+                    <div class="eq-type">Scenario · L9</div>
+                    <div class="eq-q">A colleague shows you a pie chart where slices are labelled 45%, 40%, and 35%.
+                        What is
+                        wrong with this chart? Name two other common data visualisation mistakes and explain why each is
+                        misleading.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">27</span>
                 <div>
-                    <div class="eq-type">Conceptual · L9</div>
-                    <div class="eq-q">What is the MECE principle? Define "Mutually Exclusive" and "Collectively
-                        Exhaustive" separately and explain both using the 10-product business example from the lecture.
-                    </div>
+                    <div class="eq-type">Short Answer · L9</div>
+                    <div class="eq-q">Name any 6 of the 10 analysis activity types from the lecture. For each one you
+                        name,
+                        give a brief real-world example of when you would use it.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">28</span>
                 <div>
-                    <div class="eq-type">Scenario · L9</div>
-                    <div class="eq-q">A colleague shows you a pie chart where the three slices are labelled 70%, 63%,
-                        and 60%. What is fundamentally wrong with this chart? Name two additional problems it might have
-                        and explain what chart type or correction would be appropriate.</div>
+                    <div class="eq-type">Matching · L9</div>
+                    <div class="eq-q">Match each scenario to the correct visualisation type: (a) Monthly profit
+                        2018–2024.
+                        (b) Market share of 4 mobile phone brands. (c) Relationship between ad spend and sales revenue.
+                        (d)
+                        Number of store visitors per hour. (e) Total sales by state in Australia.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">29</span>
                 <div>
-                    <div class="eq-type">Chart Selection · L9</div>
-                    <div class="eq-q">For each scenario below, name the most appropriate visualisation type and explain
-                        why: (a) showing monthly revenue over 3 years; (b) comparing the number of products sold in each
-                        country; (c) finding the relationship between advertising spend and sales; (d) showing what
-                        percentage of sales came from each product category.</div>
+                    <div class="eq-type">Scenario · L9</div>
+                    <div class="eq-q">You are given a dataset of international sales (date, country, product, revenue,
+                        units_sold). Write a problem statement for a BI dashboard answering: "Which products are growing
+                        fastest in which regions?" Then name two data acquisition questions you would ask before using
+                        this
+                        dataset.</div>
                 </div>
             </div>
             <div class="eq"><span class="eq-n">30</span>
                 <div>
-                    <div class="eq-type">Evaluation · L9</div>
-                    <div class="eq-q">You are evaluating a dataset of customer reviews scraped from a website for use in
-                        a BI project. List five questions you should ask to assess whether this data is suitable for
-                        acquisition, and briefly explain why each question matters.</div>
+                    <div class="eq-type">Short Answer · L9</div>
+                    <div class="eq-q">What does FAANG stand for? List the company name and NASDAQ stock ticker for each
+                        letter. Why is this dataset used in the lecture's practical project?</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">31</span>
+                <div>
+                    <div class="eq-type">Comparison · L10</div>
+                    <div class="eq-q">What is the main difference between a NoSQL database and a relational database? Is
+                        every NoSQL database a document database, and is every document database a NoSQL database?
+                        Explain.
+                    </div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">32</span>
+                <div>
+                    <div class="eq-type">SQL Writing · L10</div>
+                    <div class="eq-q">Write the MongoDB commands to: (a) create a collection called "products", (b)
+                        insert
+                        one document with fields id=1, name="Widget", price=29.99, inStock=true, and (c) query all
+                        documents
+                        where price is less than 50.</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">33</span>
+                <div>
+                    <div class="eq-type">Comparison · L10</div>
+                    <div class="eq-q">Compare MongoDB's query operators with their MySQL equivalents. List at least 5
+                        MongoDB operators (e.g. $lt), write the equivalent MySQL operator for each, and write an example
+                        MongoDB .find() query using at least 2 of them.</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">34</span>
+                <div>
+                    <div class="eq-type">Conceptual · L10</div>
+                    <div class="eq-q">Explain what a graph database is. Define "node" and "edge" and explain what is
+                        unique
+                        about graph databases in terms of where data is stored. When would you choose a graph database
+                        over
+                        a relational one?</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">35</span>
+                <div>
+                    <div class="eq-type">Scenario · L11</div>
+                    <div class="eq-q">The Optus data breach involved an unauthenticated API endpoint exposing 9.8
+                        million
+                        customers' personal details. Classify this incident using the Security/Ethics/Privacy framework.
+                        List three specific measures that could have prevented it.</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">36</span>
+                <div>
+                    <div class="eq-type">Case Study · L11</div>
+                    <div class="eq-q">The Victorian Government's Myki data release allowed researchers to re-identify
+                        politicians' travel patterns by combining it with public tweets. (a) What type of issue is this
+                        primarily? (b) What does this case demonstrate about anonymised data? (c) How could the data
+                        have
+                        been released more safely?</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">37</span>
+                <div>
+                    <div class="eq-type">Scenario · L11</div>
+                    <div class="eq-q">An AI hiring system rejects Jane's application despite her qualifications because
+                        historical hiring data embedded gender bias. (a) Which of Security, Ethics, or Privacy is
+                        primarily
+                        at issue? (b) Explain why this happened technically. (c) Suggest two ways to prevent it.</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">38</span>
+                <div>
+                    <div class="eq-type">Short Answer · L11</div>
+                    <div class="eq-q">List the four security practices that can prevent data leaks. For each, give a
+                        brief
+                        explanation of why it is effective. Then explain why BOTH technical AND social controls are
+                        needed
+                        for privacy.</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">39</span>
+                <div>
+                    <div class="eq-type">Definition · L12</div>
+                    <div class="eq-q">Define Blockchain. Explain each of its three defining properties (distributed,
+                        immutable, ledger of transactions) in plain English. Give two real-world use cases where these
+                        properties solve a genuine problem that a traditional database cannot.</div>
+                </div>
+            </div>
+            <div class="eq"><span class="eq-n">40</span>
+                <div>
+                    <div class="eq-type">Synthesis · L1–L12</div>
+                    <div class="eq-q">A retail company wants to build a BI system that: stores transaction data in a
+                        database, connects to live supplier data, produces a dashboard for executives, and ensures
+                        customer
+                        data is handled ethically. Identify which lecture topics apply to each of these four
+                        requirements
+                        and briefly describe what you would do at each stage.</div>
                 </div>
             </div>
         </div>
 
     </div><!-- /container -->
-    <footer>INMT5526 Business Intelligence · All 9 Lectures · Tristan W. Reed · UWA Business School</footer>
-</body>
-
-</html>
-<div class="lect-header">
-    <span class="lect-num" style="background:#333;">CHECKLIST</span>
-    <h2>Master Revision Checklist</h2>
-</div>
-
-<div class="summary-grid">
-    <div class="sc sc-l1">
-        <div class="sc-label">L1 · BI Concepts</div>
-        <ul>
-            <li>5 analytics levels (order &amp; meaning)</li>
-            <li>Report vs Dashboard distinction</li>
-            <li>Dataset vs Dataflow</li>
-            <li>Filter vs Highlight</li>
-            <li>Drill down vs Drill through</li>
-        </ul>
-    </div>
-    <div class="sc sc-l2">
-        <div class="sc-label">L2 · Databases</div>
-        <ul>
-            <li>DB vs spreadsheet (3 advantages)</li>
-            <li>All 8 database types</li>
-            <li>PK vs FK with examples</li>
-            <li>All 4 cardinalities + examples</li>
-            <li>M:M needs a linking table</li>
-            <li>5 database design steps</li>
-            <li>Read an ER diagram</li>
-        </ul>
-    </div>
-    <div class="sc sc-l3">
-        <div class="sc-label">L3 · SQL Basics</div>
-        <ul>
-            <li>CRUD — 4 ops + SQL commands</li>
-            <li>ACID — 4 principles plain English</li>
-            <li>Data types + VARCHAR vs CHAR</li>
-            <li>CREATE TABLE syntax</li>
-            <li>All ALTER TABLE variants</li>
-            <li>DELETE without WHERE danger</li>
-        </ul>
-    </div>
-    <div class="sc sc-l4">
-        <div class="sc-label">L4 · More CRUD</div>
-        <ul>
-            <li>Generated cols: VIRTUAL vs STORED</li>
-            <li>DEFAULT and CHECK constraints</li>
-            <li>FK parent-must-exist rule</li>
-            <li>CASCADE vs RESTRICT decision</li>
-            <li>All 7 WHERE operators</li>
-            <li>AND / OR / NOT usage</li>
-            <li>Indexes — purpose + trade-offs</li>
-        </ul>
-    </div>
-    <div class="sc sc-l5">
-        <div class="sc-label">L5 · Sort/Group/Agg</div>
-        <ul>
-            <li>USE — once per session</li>
-            <li>3 comment styles</li>
-            <li>SHOW CREATE TABLE vs SHOW COLUMNS</li>
-            <li>Clause order: S→F→W→G→O</li>
-            <li>SELECT rule in GROUP BY</li>
-            <li>5 aggregate functions + NULLs</li>
-            <li>MONTH() YEAR() NOW()</li>
-            <li>AS aliases + WITH ROLLUP</li>
-        </ul>
-    </div>
-    <div class="sc sc-l6">
-        <div class="sc-label">L6 · Advanced DB</div>
-        <ul>
-            <li>INNER / LEFT / RIGHT JOIN — meaning &amp; result</li>
-            <li>JOIN syntax: ON clause + table prefixes</li>
-            <li>NULLs in non-matching JOIN rows</li>
-            <li>Views — CREATE, REPLACE, DROP</li>
-            <li>Spatial: POINT, ST_GeomFromText, ST_AsText</li>
-            <li>ST_Distance_Sphere (metres)</li>
-            <li>LOAD DATA INFILE rules</li>
-        </ul>
-    </div>
-    <div class="sc sc-l7">
-        <div class="sc-label">L7 · BI Tools &amp; Power BI</div>
-        <ul>
-            <li>BI tool evolution (Excel → Pivot → Suites)</li>
-            <li>6-step BI workflow</li>
-            <li>Report vs Dashboard vs App</li>
-            <li>Power BI Desktop vs Online</li>
-            <li>8 interface areas by name</li>
-            <li>Data transformation types</li>
-            <li>DAX: Measure vs Table + syntax</li>
-            <li>Field icons: Σ, calendar, ABC</li>
-            <li>Cross-filtering behaviour</li>
-        </ul>
-    </div>
-    <div class="sc sc-l8">
-        <div class="sc-label">L8 · Programming &amp; BI</div>
-        <ul>
-            <li>R vs Python — libraries (matplotlib, seaborn, corrplot)</li>
-            <li>Script visuals: static, not interactive</li>
-            <li>2 ways to use code in Power BI</li>
-            <li>Dummy variables: concept &amp; X−1 rule</li>
-            <li>Correlation limit with binary variables</li>
-            <li>corrplot key options (method, type, order)</li>
-            <li>Imported vs Connected data — differences &amp; risks</li>
-            <li>Spatial types: Point, Polygon, Line</li>
-            <li>Choropleth vs Bubble map trade-offs</li>
-            <li>Map design pitfalls (colour, area bias, accessibility)</li>
-        </ul>
-    </div>
-    <div class="sc sc-l9">
-        <div class="sc-label">L9 · Workflows &amp; Vis Theory</div>
-        <ul>
-            <li>5-stage BI workflow (order &amp; time split)</li>
-            <li>Problem statement components</li>
-            <li>9 data acquisition questions</li>
-            <li>6 data preparation problem types</li>
-            <li>ETL: Extract, Transform, Load</li>
-            <li>ETL ≠ Data Warehouse (exam trap)</li>
-            <li>EDA — what it is and when</li>
-            <li>10 analysis activity types + examples</li>
-            <li>MECE: ME + CE + slicer link</li>
-            <li>8 visualisation types + best chart</li>
-            <li>Bad chart rules (pie %, axes, 3D)</li>
-            <li>FAANG companies + stock tickers</li>
-        </ul>
-    </div>
-</div>
-
-<h3 style="margin-top:28px;">Full Checklist</h3>
-<ul class="checklist">
-    <li><span class="cb"></span>I can name &amp; explain all 5 analytics levels and give a real example of each.</li>
-    <li><span class="cb"></span>I can explain the difference between a Report and a Dashboard (structure and purpose).
-    </li>
-    <li><span class="cb"></span>I can explain Filter vs Highlight, and Drill Down vs Drill Through.</li>
-    <li><span class="cb"></span>I know 3 ways a database beats a spreadsheet — and 1 way a spreadsheet wins.</li>
-    <li><span class="cb"></span>I can name and describe at least 6 different database types.</li>
-    <li><span class="cb"></span>I can explain PK and FK with a real example (Customer → Invoice).</li>
-    <li><span class="cb"></span>I know all 4 cardinalities and can give an example of each. I know M:M needs a linking
-        table.</li>
-    <li><span class="cb"></span>I can list the 5 database design steps in order.</li>
-    <li><span class="cb"></span>I can read and draw a basic ER diagram in Chen notation.</li>
-    <li><span class="cb"></span>I know CRUD — the 4 operations and the SQL command for each.</li>
-    <li><span class="cb"></span>I know ACID — all 4 principles in plain English with the ATM analogy.</li>
-    <li><span class="cb"></span>I know all major MySQL data types and can choose the right one for a scenario.</li>
-    <li><span class="cb"></span>I understand VARCHAR vs CHAR and when to use each.</li>
-    <li><span class="cb"></span>I can write a complete CREATE TABLE statement with types, modifiers, and a PK.</li>
-    <li><span class="cb"></span>I can use all ALTER TABLE variants (ADD, DROP, MODIFY, RENAME, CHANGE).</li>
-    <li><span class="cb"></span>I know the danger of DELETE without WHERE and DROP TABLE.</li>
-    <li><span class="cb"></span>I can explain and write a generated column (GENERATED ALWAYS AS) and know VIRTUAL vs
-        STORED.</li>
-    <li><span class="cb"></span>I can add DEFAULT and CHECK constraints and know the difference.</li>
-    <li><span class="cb"></span>I know the FK creation rule (parent must exist first).</li>
-    <li><span class="cb"></span>I can choose between CASCADE, SET NULL, and RESTRICT and justify my choice.</li>
-    <li><span class="cb"></span>I know all 7 WHERE operators and can write examples of each.</li>
-    <li><span class="cb"></span>I can combine WHERE conditions with AND, OR, NOT and use brackets.</li>
-    <li><span class="cb"></span>I can explain what an index does, its trade-offs, and write CREATE/DROP INDEX.</li>
-    <li><span class="cb"></span>I know the USE command rules — once per session, no way to cancel, best practice
-        placement.</li>
-    <li><span class="cb"></span>I know all 3 SQL comment styles and can use them appropriately.</li>
-    <li><span class="cb"></span>I know what SHOW CREATE TABLE reveals vs SHOW COLUMNS (constraints, FKs, generated
-        cols).</li>
-    <li><span class="cb"></span>I know the mandatory clause order: SELECT → FROM → WHERE → GROUP BY → ORDER BY.</li>
-    <li><span class="cb"></span>I can explain the SELECT rule in GROUP BY — why only grouped columns and aggregates.
-    </li>
-    <li><span class="cb"></span>I know all 5 aggregate functions, what data types they work on, and how NULLs affect
-        them.</li>
-    <li><span class="cb"></span>I understand COUNT(col) vs COUNT(*) and when each is needed.</li>
-    <li><span class="cb"></span>I can use MONTH() and YEAR() in both SELECT and GROUP BY parts of a query.</li>
-    <li><span class="cb"></span>I can use AS to rename output columns and WITH ROLLUP to add a grand total row.</li>
-    <li><span class="cb"></span>I know all 3 JOIN types, what rows each keeps, and when to use each one.</li>
-    <li><span class="cb"></span>I can write a JOIN query with correct ON syntax and table-prefixed column names.</li>
-    <li><span class="cb"></span>I know that non-matching rows in LEFT/RIGHT JOINs show NULL in the unmatched columns.
-    </li>
-    <li><span class="cb"></span>I can create, replace, drop, and query a View. I understand a View does not store new
-        data.</li>
-    <li><span class="cb"></span>I know the spatial POINT format: ST_GeomFromText('POINT(longitude latitude)') —
-        longitude first.</li>
-    <li><span class="cb"></span>I know to use ST_AsText() when SELECTing geometry columns, and ST_Distance_Sphere
-        returns metres.</li>
-    <li><span class="cb"></span>I know the LOAD DATA INFILE rules: table must exist first, full path required, IGNORE X
-        LINES.</li>
-    <li><span class="cb"></span>I can describe the evolution of BI tools: Excel → Pivot Tables → Modern BI Suites.</li>
-    <li><span class="cb"></span>I know the 6-step BI workflow: Connect → Model → Transform → Visualise → Assemble →
-        Share.</li>
-    <li><span class="cb"></span>I can explain Report vs Dashboard vs App and the difference between them.</li>
-    <li><span class="cb"></span>I know Power BI Desktop is Windows-only and what macOS users must do instead.</li>
-    <li><span class="cb"></span>I can identify and describe all 8 areas of the Power BI Desktop interface.</li>
-    <li><span class="cb"></span>I know the 6 types of data transformations and can give an example of each.</li>
-    <li><span class="cb"></span>I know the 3 field icon types (Σ, calendar, ABC) and what each means for how a field can
-        be used.</li>
-    <li><span class="cb"></span>I understand DAX: the difference between a Measure and a Table, and the basic syntax.
-    </li>
-    <li><span class="cb"></span>I can explain cross-filtering — clicking one visual automatically filters all others on
-        the same page.</li>
-    <li><span class="cb"></span>I can explain why you would use R or Python in Power BI instead of (or alongside)
-        built-in tools.</li>
-    <li><span class="cb"></span>I know the two ways to use R/Python in Power BI: Power Query Editor (data prep) and
-        Script Visual (visualisation).</li>
-    <li><span class="cb"></span>I know that R/Python script visuals are static — not interactive — and why this matters.
-    </li>
-    <li><span class="cb"></span>I know the key libraries: matplotlib, seaborn, and corrplot — what each is for.</li>
-    <li><span class="cb"></span>I can explain what a dummy variable is, give an example, and explain why you only need
-        X−1 columns.</li>
-    <li><span class="cb"></span>I know why correlation with binary/dummy variables is statistically limited and what to
-        use instead.</li>
-    <li><span class="cb"></span>I know at least 4 corrplot options and what each one changes in the plot's appearance.
-    </li>
-    <li><span class="cb"></span>I can explain the difference between Imported and Connected data in Power BI — how each
-        works and when to use each.</li>
-    <li><span class="cb"></span>I know the risks of connected data: dependency on live source, transformation overhead,
-        big data limits.</li>
-    <li><span class="cb"></span>I can name the three spatial data types (Point, Polygon, Line) and give a real example
-        of each.</li>
-    <li><span class="cb"></span>I know that Polygons are most useful for spatial analysis and why (they have area;
-        enable choropleth maps).</li>
-    <li><span class="cb"></span>I can explain the difference between a Bubble map (size encodes value) and a Choropleth
-        map (colour encodes value).</li>
-    <li><span class="cb"></span>I know the three map design pitfalls: misleading colour scale, geographic area bias, and
-        colour blindness accessibility.</li>
-    <li><span class="cb"></span>I can name and describe all 5 stages of the BI data workflow in order.</li>
-    <li><span class="cb"></span>I know that the majority of project time is spent in the first 3 stages — not
-        visualisation.</li>
-    <li><span class="cb"></span>I can write a well-formed problem statement and explain what it must include.</li>
-    <li><span class="cb"></span>I can name at least 6 of the 9 theoretical data acquisition questions and explain why
-        each matters.</li>
-    <li><span class="cb"></span>I know all 6 data preparation problem types (missing, wrong format, inconsistent,
-        normalisation, enrichment, irrelevant) with real examples.</li>
-    <li><span class="cb"></span>I can explain ETL (Extract, Transform, Load), describe each step, and explain why it is
-        NOT the same as a data warehouse.</li>
-    <li><span class="cb"></span>I know what Exploratory Data Analysis (EDA) is and when it fits in the workflow.</li>
-    <li><span class="cb"></span>I can name all 10 analysis activity types and give a real example of each.</li>
-    <li><span class="cb"></span>I can define MECE (Mutually Exclusive, Collectively Exhaustive) and apply it with a
-        concrete example.</li>
-    <li><span class="cb"></span>I understand why MECE matters for Power BI slicers — categories must not overlap for
-        filtering to work correctly.</li>
-    <li><span class="cb"></span>I can name all 8 visualisation types, describe what each shows, and name the best chart
-        type for each.</li>
-    <li><span class="cb"></span>I can identify what is wrong with the FOX News pie chart (values sum to 193%) and the
-        NBC2 bar chart (axes don't match values).</li>
-    <li><span class="cb"></span>I know the rules: pie charts must sum to 100%, bar chart y-axes should start at zero,
-        and 3D charts distort perception.</li>
-    <li><span class="cb"></span>I know what FAANG stands for and the NASDAQ ticker symbol for each company.</li>
-</ul>
-</div>
-
-<hr>
-
-<!-- ══════════════════════════════════════════════════════════
-     EXAM QUESTIONS
-═══════════════════════════════════════════════════════════ -->
-<div id="examqs">
-    <div class="lect-header">
-        <span class="lect-num" style="background:#333;">EXAM Qs</span>
-        <h2>30 Possible Exam Questions</h2>
-    </div>
-
-    <div class="eq"><span class="eq-n">1</span>
-        <div>
-            <div class="eq-type">Definition · L1</div>
-            <div class="eq-q">Explain the difference between Predictive and Prescriptive analytics. Give a real business
-                example of each.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">2</span>
-        <div>
-            <div class="eq-type">Definition · L1</div>
-            <div class="eq-q">What is the difference between a Report and a Dashboard? What structural rule must a
-                Dashboard follow? What is an "App" in the context of Power BI?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">3</span>
-        <div>
-            <div class="eq-type">Comparison · L2</div>
-            <div class="eq-q">List three ways a relational database is superior to a spreadsheet. Name one scenario
-                where a spreadsheet might be the better choice.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">4</span>
-        <div>
-            <div class="eq-type">Definition · L2</div>
-            <div class="eq-q">Define Primary Key and Foreign Key. Using the Customer and Invoice tables as an example,
-                explain how a Foreign Key creates a relationship.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">5</span>
-        <div>
-            <div class="eq-type">Scenario · L2</div>
-            <div class="eq-q">A university has Students and Courses. Each student can enrol in many courses, and each
-                course can have many students. What is this relationship type called, and how is it implemented in a
-                relational database?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">6</span>
-        <div>
-            <div class="eq-type">SQL Writing · L3</div>
-            <div class="eq-q">Write a CREATE TABLE statement for an Employee table with: auto-incrementing ID, required
-                full name (up to 100 chars), nullable date of birth, required decimal salary, and a boolean "isActive"
-                column that defaults to true.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">7</span>
-        <div>
-            <div class="eq-type">Short Answer · L3</div>
-            <div class="eq-q">What are the four ACID properties? Briefly explain each one using an ATM transaction as
-                your example.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">8</span>
-        <div>
-            <div class="eq-type">SQL Writing · L4</div>
-            <div class="eq-q">Write the SQL to add a Foreign Key on an existing Orders table, linking its customerID
-                column to the id column of the Customer table. Include an appropriate referential action and explain why
-                you chose it.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">9</span>
-        <div>
-            <div class="eq-type">Scenario · L4</div>
-            <div class="eq-q">You define ON DELETE CASCADE on a FK from Orders to Customer. A customer is then deleted.
-                What happens to their orders? Describe a scenario where RESTRICT would be more appropriate.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">10</span>
-        <div>
-            <div class="eq-type">SQL Writing · L4/L5</div>
-            <div class="eq-q">Using the Transaction table (id, date, customerName, transactionItem), write a query to
-                return names and dates of transactions where transactionItem > 2 AND date is within 2023. Sort results
-                by date ascending.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">11</span>
-        <div>
-            <div class="eq-type">SQL Writing · L5</div>
-            <div class="eq-q">Using TransactionItem (id, description, unitPrice, hasGst), write a query finding the
-                total sum and average unitPrice grouped by hasGst, with column aliases "totalRevenue" and "avgPrice".
-                Sort so hasGst=1 appears first.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">12</span>
-        <div>
-            <div class="eq-type">SQL Debugging · L5</div>
-            <div class="eq-q">This query causes an error:
-                <code>SELECT department, employeeName, COUNT(id) FROM Sales GROUP BY department;</code>. Identify the
-                problem and write the corrected query.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">13</span>
-        <div>
-            <div class="eq-type">Conceptual · L6</div>
-            <div class="eq-q">Explain the difference between INNER JOIN, LEFT JOIN, and RIGHT JOIN. Using the
-                TableOne/TableTwo example from the lecture (where only id=2 matches), describe exactly what each JOIN
-                returns.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">14</span>
-        <div>
-            <div class="eq-type">SQL Writing · L6</div>
-            <div class="eq-q">Write a query that joins a Customer table (id, fullName) and an Invoice table (id,
-                customerID, amount) to return each invoice with its customer's name. Use an appropriate JOIN type and
-                explain your choice.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">15</span>
-        <div>
-            <div class="eq-type">Conceptual · L6</div>
-            <div class="eq-q">What is a database View? How is creating a View similar to a generated column? Write the
-                SQL to create a view called "ActiveCustomers" that returns all customers where isActive = 1.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">16</span>
-        <div>
-            <div class="eq-type">Short Answer · L6</div>
-            <div class="eq-q">When inserting spatial POINT data in MySQL: (a) which comes first, longitude or latitude?
-                (b) What function converts text to a geometry? (c) What function must you use when SELECTing a geometry
-                column, and why?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">17</span>
-        <div>
-            <div class="eq-type">Short Answer · L7</div>
-            <div class="eq-q">Describe the evolution of BI tools from the earliest approach to modern suites. What
-                limitations of earlier tools drove the move to modern BI software?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">18</span>
-        <div>
-            <div class="eq-type">Conceptual · L7</div>
-            <div class="eq-q">In Power BI, what is the difference between a Measure and a Table created using DAX? Write
-                a DAX example of each. How does a Measure change when a user applies a filter to the report?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">19</span>
-        <div>
-            <div class="eq-type">Scenario · L7</div>
-            <div class="eq-q">A colleague loads a CSV of sales data into Power BI. The "Revenue" column shows as a text
-                field (ABC icon) instead of numeric (Σ). What is the problem, how does this affect their report, and how
-                do they fix it?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">20</span>
-        <div>
-            <div class="eq-type">Short Answer · L7</div>
-            <div class="eq-q">Explain cross-filtering in Power BI. A report page has three visuals: a line chart, a map,
-                and a bar chart. A user clicks "Germany" on the map. What happens to the line chart and bar chart?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">21</span>
-        <div>
-            <div class="eq-type">Comparison · L8</div>
-            <div class="eq-q">What are two advantages and two disadvantages of using R or Python script visuals in Power
-                BI compared to built-in visuals? Name one visualisation library available in each language.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">22</span>
-        <div>
-            <div class="eq-type">Conceptual · L8</div>
-            <div class="eq-q">What is a dummy variable? A dataset has a "Colour" column with values Red, Green, and
-                Blue. How many dummy variable columns would you create, and why not one per value? Show the
-                transformation with an example table.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">23</span>
-        <div>
-            <div class="eq-type">Scenario · L8</div>
-            <div class="eq-q">Your manager wants a Power BI dashboard that always shows today's live sales data from the
-                MySQL database. Should you use Imported or Connected data? Explain your choice and describe two risks of
-                your chosen approach.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">24</span>
-        <div>
-            <div class="eq-type">Comparison · L8</div>
-            <div class="eq-q">Compare a Bubble map and a Choropleth (filled) map. What does each use to represent data
-                values? Give one scenario where a choropleth is better, and explain one design pitfall specific to
-                choropleth maps.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">25</span>
-        <div>
-            <div class="eq-type">Short Answer · L8</div>
-            <div class="eq-q">Name the three spatial data types and give a real-world example of each. Which type is
-                generally most useful for spatial analysis and why?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">26</span>
-        <div>
-            <div class="eq-type">Short Answer · L9</div>
-            <div class="eq-q">List the 5 stages of the BI data workflow in order. Which stages consume the most time in
-                a real project, and why is this the case?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">27</span>
-        <div>
-            <div class="eq-type">Conceptual · L9</div>
-            <div class="eq-q">Explain what ETL stands for and describe each of its three steps. Why is ETL NOT the same
-                thing as a data warehouse? What relationship do they have?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">28</span>
-        <div>
-            <div class="eq-type">Definition · L9</div>
-            <div class="eq-q">Define the MECE principle. Using a business with 5 product categories as your example,
-                explain what it means for data to be Mutually Exclusive and Collectively Exhaustive. Why does MECE
-                matter for Power BI slicers?</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">29</span>
-        <div>
-            <div class="eq-type">Scenario · L9</div>
-            <div class="eq-q">A colleague shows you a pie chart of survey responses where slices are labelled 45%, 40%,
-                and 35%. What is wrong with this chart? Name two other common data visualisation mistakes and explain
-                why each is misleading.</div>
-        </div>
-    </div>
-    <div class="eq"><span class="eq-n">30</span>
-        <div>
-            <div class="eq-type">Matching · L9</div>
-            <div class="eq-q">Match each scenario to the correct visualisation type: (a) Monthly profit 2018–2024. (b)
-                Market share of 4 mobile phone brands. (c) Relationship between ad spend and sales revenue. (d) Number
-                of store visitors per hour of the day. (e) Total sales by state in Australia.</div>
-        </div>
-    </div>
-</div>
-
-</div><!-- /container -->
-<footer>INMT5526 Business Intelligence · All 9 Lectures · Tristan W. Reed · UWA Business School</footer>
+    <footer>INMT5526 Business Intelligence · All 12 Lectures · Tristan W. Reed · UWA Business School</footer>
 </body>
 
 </html>
