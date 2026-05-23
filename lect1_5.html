@@ -880,6 +880,114 @@
             font-family: 'JetBrains Mono', monospace;
             font-size: 11px;
         }
+
+        .study-note {
+            background: #fffdf2;
+            border: 1px solid #ead58a;
+            border-left: 4px solid #b88900;
+            border-radius: 6px;
+            margin: 14px 0 22px;
+            padding: 12px 14px;
+        }
+
+        .study-note-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .study-note-title {
+            color: #7a5600;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+
+        .study-note-status {
+            color: var(--muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            white-space: nowrap;
+        }
+
+        .study-note textarea {
+            width: 100%;
+            min-height: 92px;
+            resize: vertical;
+            border: 1px solid #ddc875;
+            border-radius: 4px;
+            background: #fffefa;
+            color: var(--text);
+            font: inherit;
+            line-height: 1.55;
+            padding: 10px 12px;
+        }
+
+        .study-note textarea:focus {
+            outline: 2px solid rgba(184, 137, 0, .22);
+            border-color: #b88900;
+        }
+
+        .topic-note-toggle,
+        .notes-tools button {
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            background: var(--surface);
+            color: var(--text);
+            cursor: pointer;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 500;
+            padding: 5px 8px;
+        }
+
+        .topic-note-toggle:hover,
+        .notes-tools button:hover {
+            border-color: #b88900;
+            color: #7a5600;
+        }
+
+        .study-note.collapsible {
+            display: none;
+        }
+
+        .study-note.collapsible.open {
+            display: block;
+        }
+
+        .notes-tools {
+            position: fixed;
+            right: 16px;
+            bottom: 16px;
+            z-index: 200;
+            display: flex;
+            gap: 8px;
+        }
+
+        .notes-tools button {
+            background: var(--text);
+            border-color: rgba(255, 255, 255, .18);
+            color: #fff;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, .18);
+        }
+
+        @media (max-width: 680px) {
+            .study-note-header {
+                align-items: flex-start;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .notes-tools {
+                left: 12px;
+                right: 12px;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 
@@ -5917,6 +6025,159 @@ MATCH m=(p:Person {name: <span class="str">"anthony russo"</span>})-[r:Directed]
 
     </div><!-- /container -->
     <footer>INMT5526 Business Intelligence · All 12 Lectures · Tristan W. Reed · UWA Business School</footer>
+    <script>
+        (function () {
+            const storagePrefix = 'bi-notes:';
+            const savedLabel = 'Saved';
+            const typingLabel = 'Saving...';
+
+            function makeKey(type, id) {
+                return storagePrefix + type + ':' + id;
+            }
+
+            function safeId(text, index) {
+                return (text || 'note-' + index)
+                    .toLowerCase()
+                    .replace(/[^a-z0-9]+/g, '-')
+                    .replace(/^-+|-+$/g, '')
+                    .slice(0, 70) || 'note-' + index;
+            }
+
+            function makeNoteBox(key, title, placeholder, isCollapsible) {
+                const note = document.createElement('div');
+                note.className = isCollapsible ? 'study-note collapsible' : 'study-note';
+                note.dataset.noteKey = key;
+
+                const header = document.createElement('div');
+                header.className = 'study-note-header';
+
+                const label = document.createElement('div');
+                label.className = 'study-note-title';
+                label.textContent = title;
+
+                const status = document.createElement('div');
+                status.className = 'study-note-status';
+                status.textContent = savedLabel;
+
+                const textarea = document.createElement('textarea');
+                textarea.value = localStorage.getItem(key) || '';
+                textarea.placeholder = placeholder;
+                textarea.setAttribute('aria-label', title);
+
+                let timer;
+                textarea.addEventListener('input', function () {
+                    status.textContent = typingLabel;
+                    clearTimeout(timer);
+                    timer = setTimeout(function () {
+                        localStorage.setItem(key, textarea.value);
+                        status.textContent = savedLabel;
+                    }, 250);
+                });
+
+                header.append(label, status);
+                note.append(header, textarea);
+                return note;
+            }
+
+            function makeToggleButton(key) {
+                const button = document.createElement('button');
+                button.className = 'topic-note-toggle';
+                button.type = 'button';
+                button.textContent = localStorage.getItem(key) ? 'Note saved' : 'Note';
+                return button;
+            }
+
+            function connectToggle(button, note) {
+                button.addEventListener('click', function () {
+                    note.classList.toggle('open');
+                    if (note.classList.contains('open')) {
+                        note.querySelector('textarea').focus();
+                    }
+                });
+
+                note.querySelector('textarea').addEventListener('input', function () {
+                    button.textContent = this.value.trim() ? 'Note saved' : 'Note';
+                });
+            }
+
+            document.querySelectorAll('.lect-header[id]').forEach(function (header) {
+                const title = header.querySelector('h2') ? header.querySelector('h2').textContent.trim() : header.id;
+                const key = makeKey('lecture', header.id);
+                const button = makeToggleButton(key);
+                const note = makeNoteBox(key, 'My notes - ' + title, 'Type your private study notes here. They autosave in this browser.', true);
+                if (localStorage.getItem(key)) {
+                    note.classList.add('open');
+                }
+
+                header.appendChild(button);
+                header.insertAdjacentElement('afterend', note);
+                connectToggle(button, note);
+            });
+
+            document.querySelectorAll('.container h3').forEach(function (heading, index) {
+                const headingText = heading.textContent.trim();
+                const nearestLecture = heading.closest('[class^="s"]');
+                const lectureId = nearestLecture && nearestLecture.querySelector('.lect-header[id]')
+                    ? nearestLecture.querySelector('.lect-header[id]').id
+                    : 'general';
+                const topicId = safeId(headingText, index);
+                const key = makeKey('topic', lectureId + ':' + topicId);
+                const button = makeToggleButton(key);
+
+                const note = makeNoteBox(key, 'My topic note', 'Add a quick note for this topic.', true);
+                if (localStorage.getItem(key)) {
+                    note.classList.add('open');
+                }
+
+                heading.appendChild(button);
+                heading.insertAdjacentElement('afterend', note);
+                connectToggle(button, note);
+            });
+
+            const tools = document.createElement('div');
+            tools.className = 'notes-tools';
+
+            const exportButton = document.createElement('button');
+            exportButton.type = 'button';
+            exportButton.textContent = 'Export notes';
+            exportButton.addEventListener('click', function () {
+                const notes = {};
+                for (let i = 0; i < localStorage.length; i += 1) {
+                    const key = localStorage.key(i);
+                    if (key && key.startsWith(storagePrefix)) {
+                        notes[key] = localStorage.getItem(key);
+                    }
+                }
+                const blob = new Blob([JSON.stringify(notes, null, 2)], { type: 'application/json' });
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'bi-study-notes.json';
+                link.click();
+                URL.revokeObjectURL(link.href);
+            });
+
+            const clearButton = document.createElement('button');
+            clearButton.type = 'button';
+            clearButton.textContent = 'Clear notes';
+            clearButton.addEventListener('click', function () {
+                if (!confirm('Clear all saved study notes from this browser?')) {
+                    return;
+                }
+                Object.keys(localStorage)
+                    .filter(function (key) { return key.startsWith(storagePrefix); })
+                    .forEach(function (key) { localStorage.removeItem(key); });
+                document.querySelectorAll('.study-note textarea').forEach(function (textarea) {
+                    textarea.value = '';
+                });
+                document.querySelectorAll('.topic-note-toggle').forEach(function (button) {
+                    button.textContent = 'Note';
+                });
+            });
+
+            tools.append(exportButton, clearButton);
+            document.body.appendChild(tools);
+        }());
+    </script>
 </body>
 
 </html>
